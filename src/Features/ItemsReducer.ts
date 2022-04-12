@@ -28,10 +28,25 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
             debugger
             console.log('itemsReducer')
             return {
-                ...state, items: state.items.filter(f => f._id !== action.item._id),
+                ...state,
+                // items: state.items.filter(f => f._id !== action.item._id),
                 byedItems: {
                     bItems: [action.item, ...state.byedItems.bItems],
                     totalCoast: state.byedItems.totalCoast + action.item.cost
+                }
+            }
+        }
+        case itemsActions.CHANGE_AMOUNT: {
+            debugger
+            console.log('itemsReducer')
+            return {
+                ...state,
+                byedItems: {
+                    bItems: state.byedItems.bItems.map(m => m._id === action.id ? {
+                        ...m,
+                        amount: action.amount
+                    } : m),
+                    totalCoast: state.byedItems.totalCoast + state.byedItems.bItems.filter(f => f._id === action.id)[0].cost
                 }
             }
         }
