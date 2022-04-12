@@ -24,6 +24,17 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
             console.log('itemsReducer')
             return {...state, items: action.items}
         }
+        case itemsActions.BYE_ITEM: {
+            debugger
+            console.log('itemsReducer')
+            return {
+                ...state, items: state.items.filter(f => f._id !== action.item._id),
+                byedItems: {
+                    bItems: [action.item, ...state.byedItems.bItems],
+                    totalCoast: state.byedItems.totalCoast + action.item.cost
+                }
+            }
+        }
         default:
             return state
     }

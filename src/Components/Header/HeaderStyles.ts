@@ -27,4 +27,5 @@ export const PBCase = styled.div`
 `
 export const CCase = styled.div`
   margin: 0 10px;
+  width: 60px;
 `
