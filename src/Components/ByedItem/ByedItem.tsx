@@ -9,13 +9,12 @@ type ByedItemPropsType = {
     item: ItemsType
 }
 const ByedItem = ({item}: ByedItemPropsType) => {
-    const {_id, title, image, desc,cost, amount} = item
+    const {_id, title, image, desc, amount} = item
     const [amountX, setAmountX] = useState<number>(0)
     const dispatch = useDispatch()
     const maxItemAmount = useMagSelector<number>(state => state.items.items.filter(f => f._id === _id)[0].amount)
     const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
 
-    console.log(amount)
     const minusAmount = () => {
         if (amountX === 0) {
             return
@@ -34,14 +33,14 @@ const ByedItem = ({item}: ByedItemPropsType) => {
     }
     const deleteItenFromBacket = () => {
         dispatch(magActions.deleteByedItemFromBacketAC(_id))
-        //
-        // let res = localStorage.getItem('itemsInBacket')
-        // if (res !== null) {
-        //     debugger
-        //     let i = JSON.parse(res)
-        //     let z = i.filter((f: ItemsType) => f._id !== _id)
-        //     localStorage.setItem('itemsInBacket', z)
-        // }
+
+        let res = localStorage.getItem('itemsInBacket')
+        if (res !== null) {
+            let fromLC = JSON.parse(res)
+            let toLC = fromLC.filter((f: ItemsType) => f._id !== _id)
+
+            localStorage.setItem('itemsInBacket',JSON.stringify(toLC) )
+        }
     }
     return (
         <ByedItemCase>

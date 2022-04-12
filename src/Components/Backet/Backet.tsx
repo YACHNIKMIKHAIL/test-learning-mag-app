@@ -5,21 +5,18 @@ import {BacketCase, ByedItemsCase, OrderCase} from './BacketStyles';
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
 import {useDispatch} from "react-redux";
-import {magActions} from "../../Features/ItemsAction";
 
 const Backet = () => {
-    const dispatch = useDispatch()
     const byedItems=useMagSelector<ItemsType[]>(state=>state.items.byedItems.bItems)
 
     const [byedI, setByedI] = useState<ItemsType[]>(byedItems)
 
-    useEffect(() => {
-        debugger
-        let result = localStorage.getItem('itemsInBacket')
-        if (result !== null) {
-            setByedI(JSON.parse(result))
-        }
-    }, [])
+    // useEffect(() => {
+    //     let result = localStorage.getItem('itemsInBacket')
+    //     if (result !== null) {
+    //         setByedI(JSON.parse(result))
+    //     }
+    // }, [])
 
 
     return (

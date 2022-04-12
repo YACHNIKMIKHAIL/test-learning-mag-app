@@ -32,13 +32,12 @@ const Header = () => {
         let res = localStorage.getItem('itemsInBacket')
         if (res !== null) {
             let resultItems = JSON.parse(res)
-            console.log(resultItems.itemsInBacket)
 
-            resultItems.itemsInBacket.forEach((i: ItemsType) => {
+            resultItems.forEach((i: ItemsType) => {
                 dispatch(magActions.byeItemAC(i))
             })
         }
-    }, [])
+    }, [dispatch])
 
     return (
         <HeaderCase>
