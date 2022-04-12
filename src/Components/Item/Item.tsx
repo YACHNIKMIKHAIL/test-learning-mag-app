@@ -16,6 +16,19 @@ const Item = ({item}: ItemPropsType) => {
 
     const addToBacket = () => {
         dispatch(magActions.byeItemAC(item))
+        let resLC=localStorage.getItem('itemsInBacket')
+        if(resLC!==null){
+            const newPart=JSON.parse(resLC)
+            newPart.itemsInBacket.push(item)
+            localStorage.setItem('itemsInBacket', JSON.stringify(newPart))
+        }else{
+            const toLC={
+                itemsInBacket:[item],
+                totalCost:0
+            }
+            localStorage.setItem('itemsInBacket', JSON.stringify(toLC))
+        }
+
         // localStorage.setItem('itemsInBacket', JSON.stringify([...itemsInBacket, item]))
     }
 

@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {appActions, ModeType} from "../../App/AppReducer";
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
+import {magActions} from "../../Features/ItemsAction";
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -28,13 +29,15 @@ const Header = () => {
     }
 
     useEffect(() => {
-        // let res = localStorage.getItem('itemsInBacket')
-        // if (res !== null) {
-        //     let resultItems = JSON.parse(res)
-        //     resultItems.forEach((i: ItemsType) => {
-        //         dispatch(magActions.byeItemAC(i))
-        //     })
-        // }
+        let res = localStorage.getItem('itemsInBacket')
+        if (res !== null) {
+            let resultItems = JSON.parse(res)
+            console.log(resultItems.itemsInBacket)
+
+            resultItems.itemsInBacket.forEach((i: ItemsType) => {
+                dispatch(magActions.byeItemAC(i))
+            })
+        }
     }, [])
 
     return (

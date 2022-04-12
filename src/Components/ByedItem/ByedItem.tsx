@@ -53,7 +53,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
                 <TxCase>
                     {desc}
                 </TxCase>
-                <TxCase>Amount: {amount}</TxCase>
+                <TxCase>Amount: {amount} ; Price: {item.cost}</TxCase>
             </TextCase>
             <TBCase>
                 <button onClick={minusAmount} disabled={amountX === 0}>-</button>
