@@ -9,12 +9,10 @@ type ByedItemPropsType = {
     item: ItemsType
 }
 const ByedItem = ({item}: ByedItemPropsType) => {
-    const {_id, title, image, desc, cost, amount} = item
-    console.log(image)
+    const {_id, title, image, desc, amount} = item
     const [amountX, setAmountX] = useState<number>(0)
     const dispatch = useDispatch()
     const maxItemAmount = useMagSelector<number>(state => state.items.items.filter(f => f._id === _id)[0].amount)
-    console.log(maxItemAmount)
 
     const minusAmount = () => {
         if (amountX === 0) {
@@ -32,7 +30,6 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             dispatch(magActions.changeAmountByedItemAC(_id, amount - 1))
         }
     }
-    console.log('amount', amount, 'amountX', amountX)
     return (
         <ByedItemCase>
             <ImageCase url={image}></ImageCase>

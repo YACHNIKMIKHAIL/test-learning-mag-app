@@ -9,8 +9,6 @@ export const magAPI = {
     getItems() {
         return instance.get<Array<ItemsType>>(`/`)
             .then(res => {
-                debugger
-                console.log('magAPI')
                 return res.data
             })
             .catch(err=>{
@@ -18,11 +16,8 @@ export const magAPI = {
             })
     },
     postItem(item:PostItemType) {
-        debugger
         return instance.post<ItemsType>(`/`,item)
             .then(res => {
-                debugger
-                console.log('magAPI')
                 return res.data
             })
             .catch(err=>{

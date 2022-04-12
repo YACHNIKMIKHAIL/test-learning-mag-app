@@ -20,13 +20,9 @@ const initialState = {
 export const itemsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case itemsActions.GET_ITEMS: {
-            debugger
-            console.log('itemsReducer')
             return {...state, items: action.items}
         }
         case itemsActions.BYE_ITEM: {
-            debugger
-            console.log('itemsReducer')
             return {
                 ...state,
                 // items: state.items.filter(f => f._id !== action.item._id),
@@ -37,8 +33,6 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
             }
         }
         case itemsActions.CHANGE_AMOUNT: {
-            debugger
-            console.log('itemsReducer')
             return {
                 ...state,
                 byedItems: {

@@ -28,8 +28,6 @@ export const magActions = {
 export const getItemsTC = (): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
-        debugger
-        console.log('getItemsTC')
         let res = await magAPI.getItems()
         if (res) {
             dispatch(magActions.getItemsAC(res))
@@ -43,8 +41,6 @@ export const getItemsTC = (): magThunkType => async (dispatch) => {
 export const postItemTC = (item: PostItemType): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
-        debugger
-        console.log('postItemsTC')
         let res = await magAPI.postItem(item)
         if (res) {
             dispatch(getItemsTC())

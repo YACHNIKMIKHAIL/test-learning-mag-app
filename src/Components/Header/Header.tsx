@@ -3,16 +3,12 @@ import {CCase, HeaderCase, PBCase, TCase} from './HeaderStyles';
 import {useDispatch} from "react-redux";
 import {appActions, ModeType} from "../../App/AppReducer";
 import {useMagSelector} from "../../App/store";
-import {ItemsType} from "../../Api/MagAPI";
 
 const Header = () => {
     const dispatch = useDispatch()
     const mode = useMagSelector<ModeType>(state => state.app.mode)
-    const byedItems = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
     const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
 
-    console.log(totalCost)
-    console.log(totalCost === 0)
     const goTo = () => {
         if (mode === 'bye') {
             dispatch(appActions.changeMode('order'))
@@ -23,7 +19,6 @@ const Header = () => {
         }
     }
     const goToAdm = () => {
-        debugger
         dispatch(appActions.changeMode('admin'))
     }
     return (

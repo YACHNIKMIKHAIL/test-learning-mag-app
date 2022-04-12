@@ -11,7 +11,6 @@ const Admin = () => {
     const [amount, setAmount] = useState<number>(0)
 
     const addToMag = () => {
-        debugger
         dispatch(postItemTC({title, image, desc, cost, amount}))
     }
 
