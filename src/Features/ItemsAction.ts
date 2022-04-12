@@ -1,4 +1,4 @@
-import {ItemsType, magAPI} from "../Api/MagAPI";
+import {ItemsType, magAPI, PostItemType} from "../Api/MagAPI";
 import {magThunkType} from "../App/store";
 import {appActions} from "../App/AppReducer";
 
@@ -23,6 +23,21 @@ export const getItemsTC = (): magThunkType => async (dispatch) => {
         let res = await magAPI.getItems()
         if(res) {
             dispatch(magActions.getItemsAC(res))
+        }
+    } catch (e) {
+        // seaHandleNetwork(e, dispatch)
+    } finally {
+        dispatch(appActions.setLoad(false))
+    }
+}
+export const postItemTC = (item:PostItemType): magThunkType => async (dispatch) => {
+    dispatch(appActions.setLoad(true))
+    try {
+        debugger
+        console.log('postItemsTC')
+        let res = await magAPI.postItem(item)
+        if(res) {
+            dispatch(getItemsTC())
         }
     } catch (e) {
         // seaHandleNetwork(e, dispatch)

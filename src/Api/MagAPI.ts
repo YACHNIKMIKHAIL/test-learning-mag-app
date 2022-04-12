@@ -17,6 +17,18 @@ export const magAPI = {
                 console.log(err)
             })
     },
+    postItem(item:PostItemType) {
+        debugger
+        return instance.post<ItemsType>(`/`,item)
+            .then(res => {
+                debugger
+                console.log('magAPI')
+                return res.data
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+    },
 
 }
 export type ItemsType = {
@@ -27,4 +39,11 @@ export type ItemsType = {
     cost: number
     amount: number
     __v: number
+}
+export type PostItemType = {
+    title: string,
+    image: string,
+    desc: string,
+    cost: number,
+    amount: number
 }

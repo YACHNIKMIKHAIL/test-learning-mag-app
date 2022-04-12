@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
+import {postItemTC} from "../Features/ItemsAction";
+import {useDispatch} from "react-redux";
 
 const Admin = () => {
+    const dispatch = useDispatch()
     const [image, setImage] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const [desc, setDesc] = useState<string>('')
@@ -8,7 +11,8 @@ const Admin = () => {
     const [amount, setAmount] = useState<number>(0)
 
     const addToMag = () => {
-
+        debugger
+        dispatch(postItemTC({title, image, desc, cost, amount}))
     }
 
     return (
