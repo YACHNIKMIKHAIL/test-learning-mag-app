@@ -28,7 +28,7 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
                 // items: state.items.filter(f => f._id !== action.item._id),
                 byedItems: {
                     bItems: [action.item, ...state.byedItems.bItems],
-                    totalCoast: state.byedItems.totalCoast + action.item.cost
+                    totalCoast: state.byedItems.totalCoast
                 }
             }
         }
@@ -40,7 +40,16 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
                         ...m,
                         amount: action.amount
                     } : m),
-                    totalCoast: state.byedItems.totalCoast + state.byedItems.bItems.filter(f => f._id === action.id)[0].cost
+                    totalCoast: action.totalPrice
+                }
+            }
+        }
+        case itemsActions.DELETE_FROM_BACKET: {
+            return {
+                ...state,
+                byedItems: {
+                    bItems: state.byedItems.bItems.filter(m => m._id !== action.id),
+                    totalCoast: state.byedItems.totalCoast
                 }
             }
         }

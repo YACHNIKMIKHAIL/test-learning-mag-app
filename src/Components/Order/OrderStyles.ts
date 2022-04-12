@@ -9,4 +9,5 @@ export const MainOrderCase = styled.div`
   align-items: center;
   border-radius: 20px;
   background-color: rgba(115, 77, 230, 0.51);
+  border: 2px aqua solid;
 `

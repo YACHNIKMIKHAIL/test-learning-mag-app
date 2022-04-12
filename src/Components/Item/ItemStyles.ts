@@ -8,6 +8,7 @@ export const ItemCase = styled.div`
   border-radius: 20px;
   background-color: rgba(115, 77, 230, 0.51);
   margin: 10px;
+  border: 2px aqua solid;
 `
 export const ImageCase = styled.div<{ url: string }>`
   height: 50%;
@@ -26,7 +27,7 @@ export const TextCase = styled.div`
 `
 export const TCase = styled.div`
   margin: 0 20px;
-  font-size: x-large;
+  font-size: xx-large;
 `
 export const TxCase = styled.div`
   margin: 0 20px;

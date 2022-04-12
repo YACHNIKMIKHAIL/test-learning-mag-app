@@ -7,6 +7,7 @@ export const ByedItemCase = styled.div`
   border-radius: 20px;
   background-color: rgba(115, 77, 230, 0.51);
   margin: 20px 0;
+  border: 2px hotpink solid;
 `
 export const ImageCase = styled.div<{ url: string }>`
   width: 20%;

@@ -12,9 +12,13 @@ const Item = ({item}: ItemPropsType) => {
     const {_id, title, image, desc, cost, amount} = item
     const dispatch = useDispatch()
     const isAddedToBacket = useMagSelector<string>(state => state.items.byedItems.bItems.filter(f => f._id === _id)[0]?._id)
+    const itemsInBacket = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
+
     const addToBacket = () => {
         dispatch(magActions.byeItemAC(item))
+        // localStorage.setItem('itemsInBacket', JSON.stringify([...itemsInBacket, item]))
     }
+
     return (
         <ItemCase>
             <ImageCase url={image}></ImageCase>
@@ -24,7 +28,7 @@ const Item = ({item}: ItemPropsType) => {
                 <TxCase>Amount: {amount}</TxCase>
                 <TBCase>
                     <div>Price: {cost}$</div>
-                    <button onClick={addToBacket} disabled={!!isAddedToBacket}>Add to card</button>
+                    <button onClick={addToBacket} disabled={!!isAddedToBacket}>Add to backet</button>
                 </TBCase>
             </TextCase>
         </ItemCase>

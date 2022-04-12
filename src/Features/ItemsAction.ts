@@ -6,6 +6,7 @@ export enum itemsActions {
     GET_ITEMS = 'GET_ITEMS',
     BYE_ITEM = 'BYE_ITEM',
     CHANGE_AMOUNT = 'CHANGE_AMOUNT',
+    DELETE_FROM_BACKET = 'DELETE_FROM_BACKET',
 }
 
 export type magReturnedActionsType<S> = S extends { [key: string]: infer T } ? T : never
@@ -18,9 +19,13 @@ export const magActions = {
         type: itemsActions.BYE_ITEM,
         item
     } as const),
-    changeAmountByedItemAC: (id: string, amount: number) => ({
+    changeAmountByedItemAC: (id: string, amount: number,totalPrice:number) => ({
         type: itemsActions.CHANGE_AMOUNT,
-        id, amount
+        id, amount,totalPrice
+    } as const),
+    deleteByedItemFromBacketAC: (id: string) => ({
+        type: itemsActions.DELETE_FROM_BACKET,
+        id
     } as const),
 
 }
@@ -43,6 +48,7 @@ export const postItemTC = (item: PostItemType): magThunkType => async (dispatch)
     try {
         let res = await magAPI.postItem(item)
         if (res) {
+            alert('Success!')
             dispatch(getItemsTC())
         }
     } catch (e) {

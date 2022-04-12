@@ -9,17 +9,19 @@ type ByedItemPropsType = {
     item: ItemsType
 }
 const ByedItem = ({item}: ByedItemPropsType) => {
-    const {_id, title, image, desc, amount} = item
+    const {_id, title, image, desc,cost, amount} = item
     const [amountX, setAmountX] = useState<number>(0)
     const dispatch = useDispatch()
     const maxItemAmount = useMagSelector<number>(state => state.items.items.filter(f => f._id === _id)[0].amount)
+    const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
 
+    console.log(amount)
     const minusAmount = () => {
         if (amountX === 0) {
             return
         } else {
             setAmountX(amountX - 1)
-            dispatch(magActions.changeAmountByedItemAC(_id, amount + 1))
+            dispatch(magActions.changeAmountByedItemAC(_id, amount + 1,totalCost-item.cost))
         }
     }
     const plusAmount = () => {
@@ -27,14 +29,27 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             return
         } else {
             setAmountX(amountX + 1)
-            dispatch(magActions.changeAmountByedItemAC(_id, amount - 1))
+            dispatch(magActions.changeAmountByedItemAC(_id, amount - 1,totalCost+item.cost))
         }
+    }
+    const deleteItenFromBacket = () => {
+        dispatch(magActions.deleteByedItemFromBacketAC(_id))
+        //
+        // let res = localStorage.getItem('itemsInBacket')
+        // if (res !== null) {
+        //     debugger
+        //     let i = JSON.parse(res)
+        //     let z = i.filter((f: ItemsType) => f._id !== _id)
+        //     localStorage.setItem('itemsInBacket', z)
+        // }
     }
     return (
         <ByedItemCase>
             <ImageCase url={image}></ImageCase>
             <TextCase>
-                <TCase>{title}</TCase>
+                <TCase>{title}
+                    <button onClick={deleteItenFromBacket}>x</button>
+                </TCase>
                 <TxCase>
                     {desc}
                 </TxCase>
@@ -45,6 +60,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
                 {amountX}
                 <button onClick={plusAmount} disabled={amountX === maxItemAmount}>+</button>
             </TBCase>
+
         </ByedItemCase>
     );
 };
