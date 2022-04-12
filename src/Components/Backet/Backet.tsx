@@ -6,7 +6,7 @@ import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
 
 const Backet = () => {
-    const items = useMagSelector<ItemsType[]>(state => state.items)
+    const items = useMagSelector<ItemsType[]>(state => state.items.items)
 
     return (
         <BacketCase>

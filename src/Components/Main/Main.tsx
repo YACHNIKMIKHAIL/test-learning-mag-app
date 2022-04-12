@@ -4,19 +4,37 @@ import {useDispatch} from "react-redux";
 import ItemsMap from "../Item/ItemsMap";
 import {getItemsTC} from "./../../Features/ItemsAction";
 import Backet from "../Backet/Backet";
+import {useMagSelector} from "../../App/store";
+import {ModeType} from "../../App/AppReducer";
+import Admin from "../Admin";
 
 const Main = () => {
-    const dispatch=useDispatch()
-    useEffect(()=>{
+    const dispatch = useDispatch()
+    const isLoad = useMagSelector<boolean>(state => state.app.isLoad)
+    const mode = useMagSelector<ModeType>(state => state.app.mode)
+
+
+    useEffect(() => {
         debugger
         console.log('useEffect')
         dispatch(getItemsTC())
-    },[dispatch])
+    }, [])
 
+
+    if (isLoad) {
+        return <div>Loading...</div>
+    }
     return (
         <MainCase>
-            {/*<ItemsMap/>*/}
-            <Backet/>
+            {mode === 'bye'
+                ? <ItemsMap/>
+                : mode === 'order'
+                    ? <Backet/>
+                    : mode === 'admin'
+                        ? <Admin/>
+                        : <> </>}
+
+
         </MainCase>
     );
 };

@@ -1,5 +1,6 @@
 import {ItemsType, magAPI} from "../Api/MagAPI";
 import {magThunkType} from "../App/store";
+import {appActions} from "../App/AppReducer";
 
 export enum itemsActions {
     GET_ITEMS = 'GET_ITEMS',
@@ -15,8 +16,7 @@ export const magActions = {
 }
 
 export const getItemsTC = (): magThunkType => async (dispatch) => {
-    // dispatch(setSeaAppStatus('loading'))
-    // dispatch(seaTodolistActions.changeTodolistStatusAC(todolistID, 'loading'))
+    dispatch(appActions.setLoad(true))
     try {
         debugger
         console.log('getItemsTC')
@@ -27,7 +27,6 @@ export const getItemsTC = (): magThunkType => async (dispatch) => {
     } catch (e) {
         // seaHandleNetwork(e, dispatch)
     } finally {
-        // dispatch(setSeaAppStatus('succesed'))
-        // dispatch(seaTodolistActions.changeTodolistStatusAC(todolistID, 'succesed'))
+        dispatch(appActions.setLoad(false))
     }
 }

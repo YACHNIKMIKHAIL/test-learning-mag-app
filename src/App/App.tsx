@@ -4,24 +4,25 @@ import '../App.css';
 import img from '../Images/wallpaperflare.com_wallpaper.jpg';
 import Header from "../Components/Header/Header";
 import Main from "../Components/Main/Main";
+import {useMagSelector} from "./store";
 
 
 export type ItemType = {
-  "id": string
-  "photo": string
-  "name": string
-  "description": string
-  "price": number
+    "id": string
+    "photo": string
+    "name": string
+    "description": string
+    "price": number
 }
 
 function App() {
 
-  return (
-      <AppCase>
-        <Header/>
-        <Main/>
-      </AppCase>
-  );
+    return (
+        <AppCase>
+            <Header/>
+            <Main/>
+        </AppCase>
+    );
 }
 
 export default App;
