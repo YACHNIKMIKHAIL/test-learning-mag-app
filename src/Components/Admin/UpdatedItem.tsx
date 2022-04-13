@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import {deleteItemTC} from "../../Features/ItemsAction";
+import {useDispatch} from "react-redux";
 
 type UpdatedItemPropsType = {
     _id: string
@@ -14,12 +16,14 @@ const UpdatedItem = ({_id, title, image, desc, cost, amount}: UpdatedItemPropsTy
     const [descX, setDescX] = useState<string>(desc)
     const [costX, setCostX] = useState<number>(cost)
     const [amountX, setAmountX] = useState<number>(amount)
+    const dispatch = useDispatch()
 
     const updateItem = () => {
 
     }
     const deleteItem = () => {
-
+        debugger
+        dispatch(deleteItemTC(_id))
     }
     return (
         <div style={{

@@ -33,6 +33,7 @@ export const magActions = {
 export const getItemsTC = (): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
+        debugger
         let res = await magAPI.getItems()
         if (res) {
             dispatch(magActions.getItemsAC(res))
@@ -47,6 +48,20 @@ export const postItemTC = (item: PostItemType): magThunkType => async (dispatch)
     dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.postItem(item)
+        if (res) {
+            alert('Success!')
+            dispatch(getItemsTC())
+        }
+    } catch (e) {
+        // seaHandleNetwork(e, dispatch)
+    } finally {
+        dispatch(appActions.setLoad(false))
+    }
+}
+export const deleteItemTC = (id: string): magThunkType => async (dispatch) => {
+    dispatch(appActions.setLoad(true))
+    try {
+        let res = await magAPI.deleteItem(id)
         if (res) {
             alert('Success!')
             dispatch(getItemsTC())

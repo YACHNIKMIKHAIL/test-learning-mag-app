@@ -24,7 +24,16 @@ export const magAPI = {
                 console.log(err)
             })
     },
-
+    deleteItem(id:string) {
+        return instance.delete<ItemsType>(`/${id}` )
+            .then(res => {
+                debugger
+                return res.data
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+    },
 }
 export type ItemsType = {
     _id: string

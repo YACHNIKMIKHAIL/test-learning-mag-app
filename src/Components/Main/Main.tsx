@@ -5,9 +5,8 @@ import ItemsMap from "../Item/ItemsMap";
 import Backet from "../Backet/Backet";
 import {useMagSelector} from "../../App/store";
 import {ModeType} from "../../App/AppReducer";
-import Admin from "../Admin";
-import {getItemsTC, magActions} from "../../Features/ItemsAction";
-import {ItemsType} from "../../Api/MagAPI";
+import Admin from "../Admin/Admin";
+import {getItemsTC} from "../../Features/ItemsAction";
 
 const Main = () => {
     const dispatch = useDispatch()
