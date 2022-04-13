@@ -6,7 +6,8 @@ import Backet from "../Backet/Backet";
 import {useMagSelector} from "../../App/store";
 import {ModeType} from "../../App/AppReducer";
 import Admin from "../Admin";
-import {getItemsTC} from "../../Features/ItemsAction";
+import {getItemsTC, magActions} from "../../Features/ItemsAction";
+import {ItemsType} from "../../Api/MagAPI";
 
 const Main = () => {
     const dispatch = useDispatch()
@@ -17,7 +18,15 @@ const Main = () => {
     useEffect(() => {
         dispatch(getItemsTC())
     }, [dispatch])
-
+    // useEffect(() => {
+    //     let res = localStorage.getItem('itemsInBacket')
+    //     if (res !== null) {
+    //         let resultItems = JSON.parse(res)
+    //         resultItems.forEach((i: ItemsType) => {
+    //             dispatch(magActions.byeItemAC(i))
+    //         })
+    //     }
+    // }, [dispatch])
 
     if (isLoad) {
         return <div>Loading...</div>

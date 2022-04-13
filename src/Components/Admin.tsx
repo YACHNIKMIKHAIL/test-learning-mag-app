@@ -19,7 +19,7 @@ const Admin = () => {
     }
     console.log(itemsInMag)
     return (
-        <div style={{width:'100%'}}>
+        <div style={{width:'100%',overflow:'auto'}}>
             <div>
                 image: <input type="text" value={image} onChange={(e) => setImage(e.currentTarget.value)}/>
             </div>

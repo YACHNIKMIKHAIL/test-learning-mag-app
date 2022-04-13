@@ -32,7 +32,6 @@ const Header = () => {
         let res = localStorage.getItem('itemsInBacket')
         if (res !== null) {
             let resultItems = JSON.parse(res)
-
             resultItems.forEach((i: ItemsType) => {
                 dispatch(magActions.byeItemAC(i))
             })
@@ -48,7 +47,7 @@ const Header = () => {
                 <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>
                 <CCase>
                     <button onClick={goTo}
-                        disabled={itemsInBacket.length===0}
+                            disabled={itemsInBacket.length === 0 && mode !== 'order'}
                     >Go
                         to {mode === 'bye' ? 'backet' : mode === 'order' ? 'items' : mode === 'admin' ? 'blabla' : ''} </button>
                 </CCase>
