@@ -30,7 +30,7 @@ const Main = () => {
                     ? <Backet/>
                     : mode === 'admin'
                         ? <Admin/>
-                        : <> </>}
+                        : <></>}
 
 
         </MainCase>
