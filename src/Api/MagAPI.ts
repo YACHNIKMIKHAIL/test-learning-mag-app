@@ -34,6 +34,16 @@ export const magAPI = {
                 console.log(err)
             })
     },
+    updateItem(item:ItemsType) {
+        return instance.put<ItemsType>(`/`,item )
+            .then(res => {
+                debugger
+                return res.data
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+    },
 }
 export type ItemsType = {
     _id: string
@@ -42,7 +52,7 @@ export type ItemsType = {
     desc: string
     cost: number
     amount: number
-    __v: number
+    __v?: number
 }
 export type PostItemType = {
     title: string,

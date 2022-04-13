@@ -72,3 +72,17 @@ export const deleteItemTC = (id: string): magThunkType => async (dispatch) => {
         dispatch(appActions.setLoad(false))
     }
 }
+export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) => {
+    dispatch(appActions.setLoad(true))
+    try {
+        let res = await magAPI.updateItem(item)
+        if (res) {
+            alert('Success!')
+            dispatch(getItemsTC())
+        }
+    } catch (e) {
+        // seaHandleNetwork(e, dispatch)
+    } finally {
+        dispatch(appActions.setLoad(false))
+    }
+}

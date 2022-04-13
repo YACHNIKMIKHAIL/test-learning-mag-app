@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {deleteItemTC} from "../../Features/ItemsAction";
+import {deleteItemTC, updateItemTC} from "../../Features/ItemsAction";
 import {useDispatch} from "react-redux";
 
 type UpdatedItemPropsType = {
@@ -19,7 +19,14 @@ const UpdatedItem = ({_id, title, image, desc, cost, amount}: UpdatedItemPropsTy
     const dispatch = useDispatch()
 
     const updateItem = () => {
-
+        dispatch(updateItemTC({
+            _id: _id,
+            title: titleX,
+            image: imageX,
+            desc: descX,
+            cost: costX,
+            amount: amountX
+        }))
     }
     const deleteItem = () => {
         debugger
