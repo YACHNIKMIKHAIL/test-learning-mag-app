@@ -38,7 +38,7 @@ export const getItemsTC = (): magThunkType => async (dispatch) => {
             dispatch(magActions.getItemsAC(res))
         }
     } catch (e) {
-        // seaHandleNetwork(e, dispatch)
+
     } finally {
         dispatch(appActions.setLoad(false))
     }
@@ -52,7 +52,7 @@ export const postItemTC = (item: PostItemType): magThunkType => async (dispatch)
             dispatch(getItemsTC())
         }
     } catch (e) {
-        // seaHandleNetwork(e, dispatch)
+
     } finally {
         dispatch(appActions.setLoad(false))
     }
@@ -66,7 +66,7 @@ export const deleteItemTC = (id: string): magThunkType => async (dispatch) => {
             dispatch(getItemsTC())
         }
     } catch (e) {
-        // seaHandleNetwork(e, dispatch)
+
     } finally {
         dispatch(appActions.setLoad(false))
     }
@@ -80,7 +80,7 @@ export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) 
             dispatch(getItemsTC())
         }
     } catch (e) {
-        // seaHandleNetwork(e, dispatch)
+
     } finally {
         dispatch(appActions.setLoad(false))
     }

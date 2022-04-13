@@ -4,7 +4,6 @@ import '../App.css';
 import img from '../Images/wallpaperflare.com_wallpaper.jpg';
 import Header from "../Components/Header/Header";
 import Main from "../Components/Main/Main";
-import {useMagSelector} from "./store";
 
 
 export type ItemType = {
@@ -16,7 +15,6 @@ export type ItemType = {
 }
 
 function App() {
-
     return (
         <AppCase>
             <Header/>
