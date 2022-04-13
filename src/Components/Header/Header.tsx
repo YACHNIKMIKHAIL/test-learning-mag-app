@@ -10,7 +10,11 @@ const Header = () => {
     const dispatch = useDispatch()
     const mode = useMagSelector<ModeType>(state => state.app.mode)
     const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
-    const itemsInBacket = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
+    // const itemsInBacket = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
+    const itemsInBacket = [2,3,4]
+
+    console.log('Header')
+    console.log('itemsInBacket', itemsInBacket)
 
     const goTo = () => {
         if (mode === 'bye') {
@@ -30,9 +34,13 @@ const Header = () => {
 
     useEffect(() => {
         let res = localStorage.getItem('itemsInBacket')
+
         if (res !== null) {
             let resultItems = JSON.parse(res)
+            console.log('resultItems.length', resultItems.length)
+
             resultItems.forEach((i: ItemsType) => {
+                console.log('write to state', i)
                 dispatch(magActions.byeItemAC(i))
             })
         }

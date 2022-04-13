@@ -29,7 +29,6 @@ const UpdatedItem = ({_id, title, image, desc, cost, amount}: UpdatedItemPropsTy
         }))
     }
     const deleteItem = () => {
-        debugger
         dispatch(deleteItemTC(_id))
     }
     return (
@@ -47,7 +46,7 @@ const UpdatedItem = ({_id, title, image, desc, cost, amount}: UpdatedItemPropsTy
             </div>
             <input type="text" value={titleX} onChange={(e) => setTitleX(e.currentTarget.value)}/>
             <div>
-                {/*image: {image}*/}
+                <img src={image} alt="card" style={{height:'100px'}}/>
             </div>
             <input type="text" value={imageX} onChange={(e) => setImageX(e.currentTarget.value)}/>
             <div>

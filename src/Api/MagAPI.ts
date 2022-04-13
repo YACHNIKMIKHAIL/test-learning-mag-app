@@ -27,7 +27,6 @@ export const magAPI = {
     deleteItem(id:string) {
         return instance.delete<ItemsType>(`/${id}` )
             .then(res => {
-                debugger
                 return res.data
             })
             .catch(err=>{
@@ -37,7 +36,6 @@ export const magAPI = {
     updateItem(item:ItemsType) {
         return instance.put<ItemsType>(`/`,item )
             .then(res => {
-                debugger
                 return res.data
             })
             .catch(err=>{

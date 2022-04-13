@@ -17,13 +17,21 @@ const Main = () => {
     useEffect(() => {
         dispatch(getItemsTC())
     }, [dispatch])
+
     // useEffect(() => {
     //     let res = localStorage.getItem('itemsInBacket')
+    //     if(res!==null)console.log('LC', JSON.parse(res))
     //     if (res !== null) {
     //         let resultItems = JSON.parse(res)
     //         resultItems.forEach((i: ItemsType) => {
+    //             console.log('write to LC', i)
     //             dispatch(magActions.byeItemAC(i))
     //         })
+    //         // for (let i = 0; i <resultItems.length ; i++) {
+    //         //         console.log(i)
+    //         //         console.log(resultItems[i])
+    //         //         dispatch(magActions.byeItemAC(resultItems[i]))
+    //         // }
     //     }
     // }, [dispatch])
 
