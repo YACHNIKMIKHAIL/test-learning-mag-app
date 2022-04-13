@@ -7,38 +7,39 @@ const instance = axios.create({
 
 export const magAPI = {
     getItems() {
-        return instance.get<Array<ItemsType>>(`/`)
+        console.log(window.location.search)
+        return instance.get<Array<ItemsType>>(`/${window.location.search}`)
             .then(res => {
                 return res.data
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err)
             })
     },
-    postItem(item:PostItemType) {
-        return instance.post<ItemsType>(`/`,item)
+    postItem(item: PostItemType) {
+        return instance.post<ItemsType>(`/`, item)
             .then(res => {
                 return res.data
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err)
             })
     },
-    deleteItem(id:string) {
-        return instance.delete<ItemsType>(`/${id}` )
+    deleteItem(id: string) {
+        return instance.delete<ItemsType>(`/${id}`)
             .then(res => {
                 return res.data
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err)
             })
     },
-    updateItem(item:ItemsType) {
-        return instance.put<ItemsType>(`/`,item )
+    updateItem(item: ItemsType) {
+        return instance.put<ItemsType>(`/`, item)
             .then(res => {
                 return res.data
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err)
             })
     },
