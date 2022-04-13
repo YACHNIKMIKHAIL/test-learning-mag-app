@@ -22,20 +22,43 @@ const UpdatedItem = ({_id, title, image, desc, cost, amount}: UpdatedItemPropsTy
 
     }
     return (
-        <>
-            <div>title: {title}</div>
+        <div style={{
+            margin: '10px 0',
+            backgroundColor: 'rgba(0,175,238,0.45)',
+            borderRadius: '10px',
+            width: '100%',
+            padding: '5px',
+            border: '2px hotpink solid',
+        }}>
+            <div>
+                <div>title: {title};</div>
+                <div style={{color: 'hotpink'}}>neWtitle:{titleX}</div>
+            </div>
             <input type="text" value={titleX} onChange={(e) => setTitleX(e.currentTarget.value)}/>
-            <div>image: {image}</div>
+            <div>
+                {/*image: {image}*/}
+            </div>
             <input type="text" value={imageX} onChange={(e) => setImageX(e.currentTarget.value)}/>
-            <div>desc: {desc}</div>
+            <div>
+                <div>desc: {desc};</div>
+                <div style={{color: 'hotpink'}}>neWdesc:{descX}</div>
+            </div>
             <input type="text" value={descX} onChange={(e) => setDescX(e.currentTarget.value)}/>
-            <div>cost: {cost}</div>
+            <div>
+                <div> cost: {cost};</div>
+                <div style={{color: 'hotpink'}}> neWcost:{costX}</div>
+            </div>
             <input type="number" value={costX} onChange={(e) => setCostX(+e.currentTarget.value)}/>
-            <div>amount: {amount}</div>
+            <div>
+                <div>amount: {amount};</div>
+                <div style={{color: 'hotpink'}}>neWamount:{amountX}</div>
+            </div>
             <input type="number" value={amountX} onChange={(e) => setAmountX(+e.currentTarget.value)}/>
-            <button onClick={updateItem}>Update</button>
-            <button onClick={deleteItem}>Delete</button>
-        </>
+            <div>
+                <button onClick={updateItem}>Update</button>
+                <button onClick={deleteItem}>Delete</button>
+            </div>
+        </div>
     );
 };
 
