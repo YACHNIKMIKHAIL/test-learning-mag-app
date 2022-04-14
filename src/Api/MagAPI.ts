@@ -43,6 +43,16 @@ export const magAPI = {
                 console.log(err)
             })
     },
+    sendMessage(name:string,city:string,email:string) {
+        debugger
+        return instance.post(`/sendMessage`,{name, email, city})
+            .then(res => {
+                alert(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
 }
 export type ItemsType = {
     _id: string

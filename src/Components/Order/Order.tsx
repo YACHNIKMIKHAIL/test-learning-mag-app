@@ -93,7 +93,7 @@ import * as Yup from 'yup';
 import {FormCase, MainOrderCase} from './OrderStyles';
 import {useDispatch} from "react-redux";
 import {useMagSelector} from "../../App/store";
-import {ItemsType} from "../../Api/MagAPI";
+import {ItemsType, magAPI} from "../../Api/MagAPI";
 import {orderItems} from "../../Utils/MagUtils";
 
 const SignupSchema = Yup.object().shape({
@@ -142,11 +142,13 @@ export const Order = () => {
                 action.resetForm()
                 orderItems(itemsInBacket, allItems, dispatch)
                 // console.log(values);
-                alert(` Dear ${values.name},
-                your magazins will be send
-                in ${values.city}!
-                Check your ${values.email}
-                to confirm =)`)
+                // alert(` Dear ${values.name},
+                // your magazins will be send
+                // in ${values.city}!
+                // Check your ${values.email}
+                // to confirm =)`)
+
+                magAPI.sendMessage(values.name, values.city, values.email)
             }}
         >
             {({errors, touched}) => (
