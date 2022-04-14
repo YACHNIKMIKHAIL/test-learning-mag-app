@@ -9,7 +9,7 @@ export enum itemsActions {
     DELETE_FROM_BACKET = 'DELETE_FROM_BACKET',
 }
 
-export type magReturnedActionsType<S> = S extends { [key: string]: infer T } ? T : never
+// export type magReturnedActionsType<S> = S extends { [key: string]: infer T } ? T : never
 export const magActions = {
     getItemsAC: (items: ItemsType[]) => ({
         type: itemsActions.GET_ITEMS,
