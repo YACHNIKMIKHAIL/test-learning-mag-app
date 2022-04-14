@@ -12,6 +12,7 @@ const Backet = () => {
     // if (byedItems.length === 0) {
     //     dispatch(appActions.changeMode('bye'))
     // }
+
     return (
         <BacketCase>
             <ByedItemsCase>

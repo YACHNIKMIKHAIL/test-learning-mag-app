@@ -4,6 +4,7 @@ import {ItemsType} from "../../Api/MagAPI";
 import {useDispatch} from "react-redux";
 import {magActions} from "../../Features/ItemsAction";
 import {useMagSelector} from "../../App/store";
+import {deleteItemsFromBacket} from "../../Utils/MagUtils";
 
 type ByedItemPropsType = {
     item: ItemsType
@@ -14,7 +15,6 @@ const ByedItem = ({item}: ByedItemPropsType) => {
     const dispatch = useDispatch()
     const maxItemAmount = useMagSelector<number>(state => state.items.items.filter(f => f._id === _id)[0].amount)
     const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
-
     const minusAmount = () => {
         if (amountX === 0) {
             return
@@ -32,15 +32,16 @@ const ByedItem = ({item}: ByedItemPropsType) => {
         }
     }
     const deleteItenFromBacket = () => {
-        dispatch(magActions.deleteByedItemFromBacketAC(_id))
-
-        let res = localStorage.getItem('itemsInBacket')
-        if (res !== null) {
-            let fromLC = JSON.parse(res)
-            let toLC = fromLC.filter((f: ItemsType) => f._id !== _id)
-
-            localStorage.setItem('itemsInBacket',JSON.stringify(toLC) )
-        }
+        deleteItemsFromBacket(_id,dispatch)
+        // dispatch(magActions.deleteByedItemFromBacketAC(_id))
+        //
+        // let res = localStorage.getItem('itemsInBacket')
+        // if (res !== null) {
+        //     let fromLC = JSON.parse(res)
+        //     let toLC = fromLC.filter((f: ItemsType) => f._id !== _id)
+        //
+        //     localStorage.setItem('itemsInBacket',JSON.stringify(toLC) )
+        // }
     }
     return (
         <ByedItemCase>

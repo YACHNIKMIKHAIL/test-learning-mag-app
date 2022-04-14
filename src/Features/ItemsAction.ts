@@ -73,7 +73,6 @@ export const deleteItemTC = (id: string): magThunkType => async (dispatch) => {
 }
 export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
-    // console.log(item._id)
     try {
         let res = await magAPI.updateItem(item)
         if (res) {
