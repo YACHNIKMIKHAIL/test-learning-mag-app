@@ -130,12 +130,12 @@ export const Order = () => {
         <h3>Order your magazins</h3>
         <Formik
             initialValues={{
-                name: 'mikhail',
-                surname: 'yachnik',
-                email: 'limerick2011@yandex.by',
-                country: 'belarus',
-                city: 'brest',
-                street: 'gercena',
+                name: '',
+                surname: '',
+                email: '',
+                country: '',
+                city: '',
+                street: '',
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, action) => {
