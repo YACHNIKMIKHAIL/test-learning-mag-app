@@ -34,7 +34,7 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(searchItemsTC(search))
-    }, [debouncedSearch[0],dispatch,search])
+    }, [debouncedSearch[0]])
 
     useEffect(() => {
         let res = localStorage.getItem('itemsInBacket')
