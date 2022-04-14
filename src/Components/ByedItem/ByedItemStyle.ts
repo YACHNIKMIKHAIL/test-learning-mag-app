@@ -28,6 +28,8 @@ export const TCase = styled.div`
   background-color: rgba(115, 77, 230, 0.75);
   padding: 5px;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
 `
 export const TxCase = styled.div`
   margin: 5px 20px;

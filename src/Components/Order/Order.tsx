@@ -129,9 +129,15 @@ export const Order = () => (
                 street: '',
             }}
             validationSchema={SignupSchema}
-            onSubmit={values => {
+            onSubmit={(values, action) => {
                 // same shape as initial values
-                console.log(values);
+                action.resetForm()
+                // console.log(values);
+                alert(` Dear ${values.name},
+                your magazins will be send
+                in ${values.city}!
+                Check your ${values.email}
+                to confirm =)`)
             }}
         >
             {({errors, touched}) => (
