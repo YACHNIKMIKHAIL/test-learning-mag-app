@@ -28,11 +28,16 @@ export const TextCase = styled.div`
 export const TCase = styled.div`
   margin: 0 20px;
   font-size: xx-large;
+  background-color: rgba(115, 77, 230, 0.75);
+  padding: 5px;
+  border-radius: 5px;
 `
 export const TxCase = styled.div`
   margin: 0 20px;
   font-size: small;
-
+  background-color: rgba(115, 77, 230, 0.75);
+  padding: 5px;
+  border-radius: 5px;
 `
 export const TBCase = styled.div`
   margin: 0 20px;

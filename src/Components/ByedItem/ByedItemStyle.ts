@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ByedItemCase = styled.div`
-  height: 100px;
+  min-height: 100px;
   width: 90%;
   display: flex;
   border-radius: 20px;
@@ -23,15 +23,21 @@ export const TextCase = styled.div`
   justify-content: space-around;
 `
 export const TCase = styled.div`
-  margin: 0 20px;
+  margin: 5px 20px;
   font-size: large;
+  background-color: rgba(115, 77, 230, 0.75);
+  padding: 5px;
+  border-radius: 5px;
 `
 export const TxCase = styled.div`
-  margin: 0 20px;
+  margin: 5px 20px;
   font-size: small;
   max-width: 90%;
   max-height: 50px;
   overflow: auto;
+  background-color: rgba(115, 77, 230, 0.75);
+  padding: 5px;
+  border-radius: 5px;
 `
 export const TBCase = styled.div`
   width: 20%;

@@ -7,7 +7,11 @@ import {ItemsType} from "../../Api/MagAPI";
 
 const Backet = () => {
     const byedItems = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
-
+    // const dispatch = useDispatch()
+    //
+    // if (byedItems.length === 0) {
+    //     dispatch(appActions.changeMode('bye'))
+    // }
     return (
         <BacketCase>
             <ByedItemsCase>
@@ -18,7 +22,9 @@ const Backet = () => {
                     })}</>
                 }
 
-
+                {/*{byedItems.map((m, i) => {*/}
+                {/*    return <ByedItem key={i} item={m}/>*/}
+                {/*})}*/}
             </ByedItemsCase>
             <OrderCase>
                 <Order/>

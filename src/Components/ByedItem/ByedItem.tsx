@@ -44,7 +44,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
     }
     return (
         <ByedItemCase>
-            <ImageCase url={image}></ImageCase>
+            <ImageCase url={image}/>
             <TextCase>
                 <TCase>{title}
                     <button onClick={deleteItenFromBacket}>x</button>
@@ -52,7 +52,8 @@ const ByedItem = ({item}: ByedItemPropsType) => {
                 <TxCase>
                     {desc}
                 </TxCase>
-                <TxCase>Amount: {amount} ; Price: {item.cost}</TxCase>
+                <TxCase>Amount: {amount} </TxCase>
+                <div style={{margin: '5px 20px'}}>Price: {item.cost}</div>
             </TextCase>
             <TBCase>
                 <button onClick={minusAmount} disabled={amountX === 0}>-</button>

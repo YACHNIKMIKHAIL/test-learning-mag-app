@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {deleteItemTC, updateItemTC} from "../../Features/ItemsAction";
 import {useDispatch} from "react-redux";
+import styled from "styled-components";
 
 type UpdatedItemPropsType = {
     _id: string
@@ -41,30 +42,30 @@ const UpdatedItem = ({_id, title, image, desc, cost, amount}: UpdatedItemPropsTy
             border: '2px hotpink solid',
         }}>
             <div>
-                <div>title: {title};</div>
-                <div style={{color: 'hotpink'}}>neWtitle:{titleX}</div>
+                <TxCase>title: {title};</TxCase>
+                <TxCase style={{color: 'hotpink'}}>neWtitle:{titleX}</TxCase>
             </div>
-            <input type="text" value={titleX} onChange={(e) => setTitleX(e.currentTarget.value)}/>
-            <div>
+            <input style={{margin:'0 5px'}} type="text" value={titleX} onChange={(e) => setTitleX(e.currentTarget.value)}/>
+            <div style={{margin:'5px 5px'}}>
                 <img src={image} alt="card" style={{height:'100px'}}/>
             </div>
-            <input type="text" value={imageX} onChange={(e) => setImageX(e.currentTarget.value)}/>
+            <input style={{margin:'0 5px'}} type="text" value={imageX} onChange={(e) => setImageX(e.currentTarget.value)}/>
             <div>
-                <div>desc: {desc};</div>
-                <div style={{color: 'hotpink'}}>neWdesc:{descX}</div>
+                <TxCase>desc: {desc};</TxCase>
+                <TxCase style={{color: 'hotpink'}}>neWdesc:{descX}</TxCase>
             </div>
-            <input type="text" value={descX} onChange={(e) => setDescX(e.currentTarget.value)}/>
+            <input style={{margin:'0 5px'}} type="text" value={descX} onChange={(e) => setDescX(e.currentTarget.value)}/>
             <div>
-                <div> cost: {cost};</div>
-                <div style={{color: 'hotpink'}}> neWcost:{costX}</div>
+                <TxCase> cost: {cost};</TxCase>
+                <TxCase style={{color: 'hotpink'}}> neWcost:{costX}</TxCase>
             </div>
-            <input type="number" value={costX} onChange={(e) => setCostX(+e.currentTarget.value)}/>
+            <input style={{margin:'0 5px'}} type="number" value={costX} onChange={(e) => setCostX(+e.currentTarget.value)}/>
             <div>
-                <div>amount: {amount};</div>
-                <div style={{color: 'hotpink'}}>neWamount:{amountX}</div>
+                <TxCase>amount: {amount};</TxCase>
+                <TxCase style={{color: 'hotpink'}}>neWamount:{amountX}</TxCase>
             </div>
-            <input type="number" value={amountX} onChange={(e) => setAmountX(+e.currentTarget.value)}/>
-            <div>
+            <input style={{margin:'0 5px'}} type="number" value={amountX} onChange={(e) => setAmountX(+e.currentTarget.value)}/>
+            <div style={{padding:'5px'}}>
                 <button onClick={updateItem}>Update</button>
                 <button onClick={deleteItem}>Delete</button>
             </div>
@@ -73,3 +74,11 @@ const UpdatedItem = ({_id, title, image, desc, cost, amount}: UpdatedItemPropsTy
 };
 
 export default UpdatedItem;
+
+export const TxCase = styled.div`
+  margin: 5px 20px;
+  font-size: small;
+  background-color: rgba(0, 175, 238, 0.91);
+  padding: 5px;
+  border-radius: 5px;
+`

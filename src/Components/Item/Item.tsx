@@ -30,13 +30,13 @@ const Item = ({item}: ItemPropsType) => {
 
     return (
         <ItemCase>
-            <ImageCase url={image}></ImageCase>
+            <ImageCase url={image}/>
             <TextCase>
                 <TCase>{title}</TCase>
                 <TxCase>{desc}</TxCase>
                 <TxCase>Amount: {amount}</TxCase>
                 <TBCase>
-                    <div>Price: {cost}$</div>
+                    <>Price: {cost}$</>
                     <button onClick={addToBacket} disabled={!!isAddedToBacket}>Add to backet</button>
                 </TBCase>
             </TextCase>
