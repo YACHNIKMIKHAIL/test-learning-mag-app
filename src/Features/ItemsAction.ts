@@ -7,6 +7,7 @@ export enum itemsActions {
     BYE_ITEM = 'BYE_ITEM',
     CHANGE_AMOUNT = 'CHANGE_AMOUNT',
     DELETE_FROM_BACKET = 'DELETE_FROM_BACKET',
+    RESET_TOTAL_PRICE = 'RESET_TOTAL_PRICE',
 }
 
 // export type magReturnedActionsType<S> = S extends { [key: string]: infer T } ? T : never
@@ -27,7 +28,9 @@ export const magActions = {
         type: itemsActions.DELETE_FROM_BACKET,
         id
     } as const),
-
+    resetTotalPriceAC: () => ({
+        type: itemsActions.RESET_TOTAL_PRICE,
+    } as const),
 }
 
 export const getItemsTC = (): magThunkType => async (dispatch) => {
@@ -48,7 +51,7 @@ export const postItemTC = (item: PostItemType): magThunkType => async (dispatch)
     try {
         let res = await magAPI.postItem(item)
         if (res) {
-            alert('Success!')
+            // alert('Success!')
             dispatch(getItemsTC())
         }
     } catch (e) {
@@ -62,7 +65,7 @@ export const deleteItemTC = (id: string): magThunkType => async (dispatch) => {
     try {
         let res = await magAPI.deleteItem(id)
         if (res) {
-            alert('Success!')
+            // alert('Success!')
             dispatch(getItemsTC())
         }
     } catch (e) {
@@ -76,9 +79,20 @@ export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) 
     try {
         let res = await magAPI.updateItem(item)
         if (res) {
-            alert('Success!')
+            // alert('Success!')
             dispatch(getItemsTC())
         }
+    } catch (e) {
+
+    } finally {
+        dispatch(appActions.setLoad(false))
+    }
+}
+export const orderItemsTC = (name:string,city:string,email:string): magThunkType => async (dispatch) => {
+    dispatch(appActions.setLoad(true))
+    try {
+        await magAPI.sendMessage(name, city, email)
+            dispatch(magActions.resetTotalPriceAC())
     } catch (e) {
 
     } finally {

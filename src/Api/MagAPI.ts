@@ -2,7 +2,8 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://localhost:9001/items'
+    // baseURL: 'http://localhost:9001/items'
+    baseURL: 'https://test-server-express.herokuapp.com/items'
 })
 
 export const magAPI = {
@@ -47,7 +48,7 @@ export const magAPI = {
         debugger
         return instance.post(`/sendMessage`,{name, email, city})
             .then(res => {
-                alert(res)
+                // alert(res)
             })
             .catch(err => {
                 console.log(err)

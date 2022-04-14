@@ -53,6 +53,16 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
                 }
             }
         }
+        case itemsActions.RESET_TOTAL_PRICE: {
+            debugger
+            return {
+                ...state,
+                byedItems: {
+                    bItems: state.byedItems.bItems,
+                    totalCoast: 0
+                }
+            }
+        }
         default:
             return state
     }

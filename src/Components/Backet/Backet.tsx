@@ -4,14 +4,11 @@ import ByedItem from "../ByedItem/ByedItem";
 import {BacketCase, ByedItemsCase, OrderCase} from './BacketStyles';
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
+import {useDispatch} from "react-redux";
+import {appActions} from "../../App/AppReducer";
 
 const Backet = () => {
     const byedItems = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
-    // const dispatch = useDispatch()
-    //
-    // if (byedItems.length === 0) {
-    //     dispatch(appActions.changeMode('bye'))
-    // }
 
     return (
         <BacketCase>

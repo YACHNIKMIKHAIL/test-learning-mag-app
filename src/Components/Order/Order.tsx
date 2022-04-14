@@ -95,6 +95,7 @@ import {useDispatch} from "react-redux";
 import {useMagSelector} from "../../App/store";
 import {ItemsType, magAPI} from "../../Api/MagAPI";
 import {orderItems} from "../../Utils/MagUtils";
+import {orderItemsTC} from "../../Features/ItemsAction";
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -147,8 +148,7 @@ export const Order = () => {
                 // in ${values.city}!
                 // Check your ${values.email}
                 // to confirm =)`)
-
-                magAPI.sendMessage(values.name, values.city, values.email)
+                dispatch(orderItemsTC(values.name, values.city, values.email))
             }}
         >
             {({errors, touched}) => (

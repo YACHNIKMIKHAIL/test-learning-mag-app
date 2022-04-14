@@ -78,7 +78,7 @@ export default UpdatedItem;
 export const TxCase = styled.div`
   margin: 5px 20px;
   font-size: small;
-  background-color: rgba(0, 175, 238, 0.91);
+  background-color: rgba(2, 26, 35, 0.63);
   padding: 5px;
   border-radius: 5px;
 `

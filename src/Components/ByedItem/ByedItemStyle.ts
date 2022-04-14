@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ByedItemCase = styled.div`
-  min-height: 100px;
+  min-height: 150px;
   width: 90%;
   display: flex;
   border-radius: 20px;
