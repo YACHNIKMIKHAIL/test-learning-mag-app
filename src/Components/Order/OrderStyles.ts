@@ -12,11 +12,11 @@ export const MainOrderCase = styled.div`
   border: 2px aqua solid;
 `
 export const FormCase = styled.div`
-  height: 300px;
+  height: 290px;
   min-width: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   border-radius: 20px;
   //background-color: rgba(115, 77, 230, 0.72);

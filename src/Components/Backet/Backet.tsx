@@ -1,5 +1,5 @@
 import React from 'react';
-import Order from "../Order/Order";
+import {Order} from "../Order/Order";
 import ByedItem from "../ByedItem/ByedItem";
 import {BacketCase, ByedItemsCase, OrderCase} from './BacketStyles';
 import {useMagSelector} from "../../App/store";
