@@ -20,7 +20,8 @@ const initialState = {
 export const itemsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case itemsActions.GET_ITEMS: {
-            return {...state, items: action.items}
+            debugger
+            return {...state, items:action.items}
         }
         case itemsActions.BYE_ITEM: {
             return {

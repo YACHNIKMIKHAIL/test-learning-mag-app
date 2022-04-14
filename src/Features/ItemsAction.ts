@@ -46,6 +46,20 @@ export const getItemsTC = (): magThunkType => async (dispatch) => {
         dispatch(appActions.setLoad(false))
     }
 }
+export const searchItemsTC = (s:string): magThunkType => async (dispatch) => {
+    dispatch(appActions.setLoad(true))
+    try {
+        debugger
+        let res = await magAPI.searchItems(s)
+        if (res) {
+            dispatch(magActions.getItemsAC(res))
+        }
+    } catch (e) {
+
+    } finally {
+        dispatch(appActions.setLoad(false))
+    }
+}
 export const postItemTC = (item: PostItemType): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
