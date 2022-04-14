@@ -91,6 +91,10 @@ import React from 'react';
 import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import {FormCase, MainOrderCase} from './OrderStyles';
+import {useDispatch} from "react-redux";
+import {useMagSelector} from "../../App/store";
+import {ItemsType} from "../../Api/MagAPI";
+import {orderItems} from "../../Utils/MagUtils";
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -116,8 +120,12 @@ const SignupSchema = Yup.object().shape({
         .required('Required'),
 });
 
-export const Order = () => (
-    <MainOrderCase>
+export const Order = () => {
+    const itemsInBacket = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
+    const allItems = useMagSelector<ItemsType[]>(state => state.items.items)
+    const dispatch = useDispatch()
+
+    return <MainOrderCase>
         <h3>Order your magazins</h3>
         <Formik
             initialValues={{
@@ -132,6 +140,7 @@ export const Order = () => (
             onSubmit={(values, action) => {
                 // same shape as initial values
                 action.resetForm()
+                orderItems(itemsInBacket, allItems, dispatch)
                 // console.log(values);
                 alert(` Dear ${values.name},
                 your magazins will be send
@@ -177,4 +186,4 @@ export const Order = () => (
             )}
         </Formik>
     </MainOrderCase>
-);
+};

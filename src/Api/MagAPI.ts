@@ -7,7 +7,7 @@ const instance = axios.create({
 
 export const magAPI = {
     getItems() {
-        console.log(window.location.search)
+        // console.log(window.location.search)
         return instance.get<Array<ItemsType>>(`/${window.location.search}`)
             .then(res => {
                 return res.data
