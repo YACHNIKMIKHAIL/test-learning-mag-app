@@ -8,6 +8,7 @@ export enum itemsActions {
     CHANGE_AMOUNT = 'CHANGE_AMOUNT',
     DELETE_FROM_BACKET = 'DELETE_FROM_BACKET',
     RESET_TOTAL_PRICE = 'RESET_TOTAL_PRICE',
+    SEARCH_ITEMS = 'SEARCH_ITEMS',
 }
 
 // export type magReturnedActionsType<S> = S extends { [key: string]: infer T } ? T : never
@@ -31,6 +32,10 @@ export const magActions = {
     resetTotalPriceAC: () => ({
         type: itemsActions.RESET_TOTAL_PRICE,
     } as const),
+    searchItemsAC: (v:string) => ({
+        type: itemsActions.SEARCH_ITEMS,
+        v
+    } as const),
 }
 
 export const getItemsTC = (): magThunkType => async (dispatch) => {
@@ -49,7 +54,6 @@ export const getItemsTC = (): magThunkType => async (dispatch) => {
 export const searchItemsTC = (s:string): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
-        debugger
         let res = await magAPI.searchItems(s)
         if (res) {
             dispatch(magActions.getItemsAC(res))

@@ -2,8 +2,8 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://localhost:9001/items'
-    // baseURL: 'https://test-server-express.herokuapp.com/items'
+    // baseURL: 'http://localhost:9001/items'
+    baseURL: 'https://test-server-express.herokuapp.com/items'
 })
 
 export const magAPI = {
@@ -21,7 +21,6 @@ export const magAPI = {
         // console.log(window.location.search)
         return instance.get(`/?search=${s}`,)
             .then(res => {
-                debugger
                 return res.data
             })
             .catch(err => {
@@ -56,7 +55,6 @@ export const magAPI = {
             })
     },
     sendMessage(name:string,city:string,email:string) {
-        debugger
         return instance.post(`/sendMessage`,{name, email, city})
             .then(res => {
                 // alert(res)

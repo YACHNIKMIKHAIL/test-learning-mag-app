@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {CCase, HeaderCase, PBCase, TCase} from './HeaderStyles';
 import {useDispatch} from "react-redux";
 import {appActions, ModeType} from "../../App/AppReducer";
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
 import {magActions, searchItemsTC} from "../../Features/ItemsAction";
+import {useDebounce} from "use-debounce";
 
 const Header = () => {
     const dispatch = useDispatch()
     const mode = useMagSelector<ModeType>(state => state.app.mode)
     const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
     const itemsInBacket = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
-    const [search, setSearch] = useState<string>('')
+    const search = useMagSelector<string>(state => state.items.search)
+    const debouncedSearch = useDebounce<string>(search, 1000)
 
     const goTo = () => {
         if (mode === 'bye') {
@@ -28,9 +30,11 @@ const Header = () => {
     const goToBack = () => {
         dispatch(appActions.changeMode('bye'))
     }
-    const searchF = () => {
+
+
+    useEffect(() => {
         dispatch(searchItemsTC(search))
-    }
+    }, [debouncedSearch[0],dispatch,search])
 
     useEffect(() => {
         let res = localStorage.getItem('itemsInBacket')
@@ -51,8 +55,7 @@ const Header = () => {
             </TCase>
             <div style={{display: 'flex'}}>
                 <input type="text" placeholder='search' value={search}
-                       onChange={(e) => setSearch(e.currentTarget.value)}/>
-                <button onClick={searchF}>Search</button>
+                       onChange={(e) => dispatch(magActions.searchItemsAC(e.currentTarget.value))}/>
             </div>
             <PBCase>
                 <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>

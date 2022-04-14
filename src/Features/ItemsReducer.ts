@@ -7,21 +7,22 @@ type InitialStateType = {
     byedItems: {
         bItems: ItemsType[],
         totalCoast: number
-    }
+    },
+    search: string
 }
 
 const initialState = {
     items: [] as ItemsType[],
     byedItems: {
         bItems: [] as ItemsType[],
-        totalCoast: 0
-    }
+        totalCoast: 0,
+    },
+    search: ''
 }
 export const itemsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case itemsActions.GET_ITEMS: {
-            debugger
-            return {...state, items:action.items}
+            return {...state, items: action.items}
         }
         case itemsActions.BYE_ITEM: {
             return {
@@ -55,13 +56,18 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
             }
         }
         case itemsActions.RESET_TOTAL_PRICE: {
-            debugger
             return {
                 ...state,
                 byedItems: {
                     bItems: state.byedItems.bItems,
                     totalCoast: 0
                 }
+            }
+        }
+        case itemsActions.SEARCH_ITEMS: {
+            return {
+                ...state,
+                search:action.v
             }
         }
         default:
