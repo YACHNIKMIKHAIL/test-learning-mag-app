@@ -17,6 +17,7 @@ const Admin = () => {
     const addToMag = () => {
         dispatch(postItemTC({title, image, desc, cost, amount}))
     }
+
     return (
         <div style={{width: '100%', overflow: 'auto', display: 'flex', flexDirection: "column", alignItems: 'center'}}>
             <div style={{

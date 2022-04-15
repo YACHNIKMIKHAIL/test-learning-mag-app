@@ -2,8 +2,10 @@ import React from 'react';
 import {ImageCase, ItemCase, TBCase, TCase, TextCase, TxCase} from './ItemStyles';
 import {ItemsType} from "../../Api/MagAPI";
 import {useDispatch} from "react-redux";
-import {magActions} from "../../Features/ItemsAction";
 import {useMagSelector} from "../../App/store";
+import {Button} from '@mui/material';
+import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
+import {addItemToLCBacket} from "../../Utils/MagUtils";
 
 type ItemPropsType = {
     item: ItemsType
@@ -14,18 +16,7 @@ const Item = ({item}: ItemPropsType) => {
     const isAddedToBacket = useMagSelector<string>(state => state.items.byedItems.bItems.filter(f => f._id === _id)[0]?._id)
 
     const addToBacket = () => {
-        dispatch(magActions.byeItemAC(item))
-        let resLC = localStorage.getItem('itemsInBacket')
-        if (resLC !== null) {
-            const newPart = JSON.parse(resLC)
-            newPart.push(item)
-            localStorage.setItem('itemsInBacket', JSON.stringify(newPart))
-        } else {
-            const toLC = [item]
-            localStorage.setItem('itemsInBacket', JSON.stringify(toLC))
-        }
-
-        // localStorage.setItem('itemsInBacket', JSON.stringify([...itemsInBacket, item]))
+        addItemToLCBacket(item, dispatch)
     }
 
     return (
@@ -37,7 +28,10 @@ const Item = ({item}: ItemPropsType) => {
                 <TxCase>Amount: {amount}</TxCase>
                 <TBCase>
                     <>Price: {cost}$</>
-                    <button onClick={addToBacket} disabled={!!isAddedToBacket}>Add to backet</button>
+                    <Button variant="contained" disabled={!!isAddedToBacket} onClick={addToBacket}
+                            style={!!isAddedToBacket ? {backgroundColor: 'rgba(0,217,255,0.05)'} : {backgroundColor: 'rgba(0,217,255,0.58)'}}
+                    >Add
+                        to <LocalGroceryStoreIcon style={{height: '15px'}}/></Button>
                 </TBCase>
             </TextCase>
         </ItemCase>

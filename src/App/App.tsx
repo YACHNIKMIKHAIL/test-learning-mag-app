@@ -2,30 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import '../App.css';
 import img from '../Images/wallpaperflare.com_wallpaper.jpg';
-import Header from "../Components/Header/Header";
 import Main from "../Components/Main/Main";
-
-
-export type ItemType = {
-    "id": string
-    "photo": string
-    "name": string
-    "description": string
-    "price": number
-}
+import MuiHeader from "../Components/Header/MuiHeader";
+import AlertComponent from "../Components/SnaskBar/Alert";
 
 function App() {
     return (
         <AppCase>
-            <Header/>
+            <MuiHeader/>
             <Main/>
+            <AlertComponent/>
         </AppCase>
     );
 }
 
 export default App;
 
-const AppCase = styled.div`
+export const AppCase = styled.div`
   background: url(${img}) no-repeat center/cover;
   height: 100vh;
   display: flex;
