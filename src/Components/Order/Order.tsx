@@ -88,12 +88,12 @@
 // export default Order;
 
 import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import {Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {FormCase, MainOrderCase} from './OrderStyles';
 import {useDispatch} from "react-redux";
 import {useMagSelector} from "../../App/store";
-import {ItemsType, magAPI} from "../../Api/MagAPI";
+import {ItemsType} from "../../Api/MagAPI";
 import {orderItems} from "../../Utils/MagUtils";
 import {orderItemsTC} from "../../Features/ItemsAction";
 
@@ -130,12 +130,12 @@ export const Order = () => {
         <h3>Order your magazins</h3>
         <Formik
             initialValues={{
-                name: 'mikhail',
-                surname: 'yachnik',
-                email: 'limerick2011@yandex.by',
-                country: 'belarus',
-                city: 'brest',
-                street: 'gercena',
+                name: '',
+                surname: '',
+                email: '',
+                country: '',
+                city: '',
+                street: '',
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, action) => {

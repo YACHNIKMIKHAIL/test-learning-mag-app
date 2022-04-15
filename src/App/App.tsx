@@ -25,7 +25,7 @@ function App() {
 
 export default App;
 
-const AppCase = styled.div`
+export const AppCase = styled.div`
   background: url(${img}) no-repeat center/cover;
   height: 100vh;
   display: flex;

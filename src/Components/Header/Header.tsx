@@ -13,6 +13,8 @@ const Header = () => {
     const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
     const itemsInBacket = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
     const search = useMagSelector<string>(state => state.items.search)
+    const isLoad = useMagSelector<boolean>(state => state.app.isLoad)
+
     const debouncedSearch = useDebounce<string>(search, 1000)
 
     const goTo = () => {
@@ -34,7 +36,7 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(searchItemsTC(search))
-    }, [debouncedSearch[0],dispatch,search])
+    }, [debouncedSearch[0]])
 
     useEffect(() => {
         let res = localStorage.getItem('itemsInBacket')
@@ -54,14 +56,14 @@ const Header = () => {
                 MY <span onClick={goToAdm}>TEST</span> MAG <span onClick={goToBack}>APP</span>
             </TCase>
             <div style={{display: 'flex'}}>
-                <input type="text" placeholder='search' value={search}
+                <input type="text" placeholder='search' value={search} disabled={isLoad}
                        onChange={(e) => dispatch(magActions.searchItemsAC(e.currentTarget.value))}/>
             </div>
             <PBCase>
                 <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>
                 <CCase>
                     <button onClick={goTo}
-                            disabled={itemsInBacket.length === 0 && mode !== 'order'}
+                            disabled={itemsInBacket.length === 0 && mode !== 'order' || isLoad}
                     >Go
                         to {mode === 'bye' ? 'backet' : mode === 'order' ? 'items' : mode === 'admin' ? 'blabla' : ''} </button>
                 </CCase>
