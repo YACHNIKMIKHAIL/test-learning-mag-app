@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import {FormCase, HCase, MainOrderCase} from './OrderStyles';
+import {FormCase, MainOrderCase} from './OrderStyles';
 import {useDispatch} from "react-redux";
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
@@ -43,7 +43,12 @@ export const Order = () => {
     const dispatch = useDispatch()
 
     return <MainOrderCase>
-        <HCase>Order your magazins</HCase>
+        <h3 style={{
+            backgroundColor: 'hotpink',
+            borderRadius: '10px',
+            padding: '5px 10px'
+        }}
+        >Order your magazins </h3>
         <Formik
             initialValues={{
                 name: '',
@@ -61,7 +66,7 @@ export const Order = () => {
                 dispatch(orderItemsTC(values.name, values.city, values.email))
             }}
         >
-            {({errors, touched,values,handleChange}) => (
+            {({errors, touched, values, handleChange}) => (
                 <Form>
                     <FormCase>
                         <FormControl>

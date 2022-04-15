@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const MainOrderCase = styled.div`
   min-width: 350px;
-  max-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -21,9 +20,4 @@ export const FormCase = styled.div`
   align-items: center;
   border-radius: 20px;
   margin: 0 10px 20px 10px;
-`
-export const HCase = styled.h3`
-  background-color: hotpink;
-  border-radius: 10px;
-  padding: 5px 10px;
 `
