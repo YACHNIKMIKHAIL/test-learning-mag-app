@@ -18,7 +18,7 @@ export const NoItemsInBacketCase = styled.div`
   font-family: 'Rubik Moonrocks', cursive;
   font-size: 40px;
   margin: 30px 0;
-  background-color: rgba(0,217,255,0.58);
+  background-color: rgba(115, 77, 230, 0.51);
   padding: 20px;
   border-radius: 10px;
 `

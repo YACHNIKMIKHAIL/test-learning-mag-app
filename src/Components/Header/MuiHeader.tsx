@@ -141,7 +141,7 @@ export default function MuiHeader() {
                         />
                     </Search>}
                     {/*<CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>*/}
-                    <Box sx={{flexGrow: 1, textAlign: 'right',display:'flex',alignItems:'center'}} onClick={goTo}>
+                    <Box sx={{flexGrow: 1, textAlign: 'right',display:'flex',alignItems:'center',margin:'0 10px'}} onClick={goTo}>
                         <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>
                         <IconButton size="large"
                                     edge="start"

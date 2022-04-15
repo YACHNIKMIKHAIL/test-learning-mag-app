@@ -29,5 +29,8 @@ export const CCase = styled.div`
   margin: 0 10px 0 auto;
   width: 60px;
   font-size: 20px;
-  color:hotpink;
+  color:white;
+  background-color:rgba(115, 77, 230, 0.51);
+  text-align: center;
+  border-radius: 10px;
 `
