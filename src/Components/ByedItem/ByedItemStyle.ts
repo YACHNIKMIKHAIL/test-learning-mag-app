@@ -44,6 +44,8 @@ export const TxCase = styled.div`
 export const TBCase = styled.div`
   width: 20%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  font-size: 25px;
 `

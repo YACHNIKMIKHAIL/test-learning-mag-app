@@ -144,9 +144,9 @@ export default function MuiHeader() {
                     <Box sx={{flexGrow: 1, textAlign: 'right'}} onClick={goTo}>
                         <IconButton size="large"
                                     edge="start"
-                                    color="inherit">
-                            <Badge badgeContent={itemsInBacket.length} color="error"
-                                   aria-disabled={(itemsInBacket.length === 0 && mode !== 'order') || isLoad}>
+                                    color="inherit"
+                        disabled={(itemsInBacket.length === 0 && mode !== 'order') || isLoad}>
+                            <Badge badgeContent={itemsInBacket.length} color="error">
                                 {mode === 'bye'
                                     ? <LocalGroceryStoreIcon/>
                                     : mode === 'order'

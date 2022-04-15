@@ -1,101 +1,17 @@
-// import React from 'react';
-// import {FormCase, MainOrderCase} from './OrderStyles';
-// import {useFormik} from "formik";
-//
-// const Order = () => {
-//     const formik = useFormik({
-//         initialValues: {
-//             name: '',
-//             surname: '',
-//             email: '',
-//             country: '',
-//             city: '',
-//             street: '',
-//         },
-//         onSubmit: value => {
-//             console.log({
-//                 name: value.name,
-//                 surname: value.surname,
-//                 email: value.email,
-//                 country: value.country,
-//                 city: value.city,
-//                 street: value.street,
-//             })
-//             formik.resetForm()
-//             // axios.post("https://ymndjs.herokuapp.com/sendMessage", {
-//             //     // axios.post("http://localhost:3010/sendMessage", {
-//             //     name: value.name,
-//             //     surname: value.surname,
-//             //     email: value.email,
-//             //     address: value.address,
-//             // })
-//             //     .then(() => {
-//             //         alert('ok!')
-//             //     })
-//         }
-//     })
-//
-//     return (
-//         <MainOrderCase>
-//             <form onSubmit={formik.handleSubmit}>
-//                 <FormCase>
-//                     Name: <input
-//                     type={"text"}
-//                     placeholder={"Name"}
-//                     {...formik.getFieldProps('name')}
-//                 />
-//
-//                 {/*<input type="text" placeholder={'surname'}/>*/}
-//                     Surname: <input
-//                     type={"text"}
-//                     placeholder={"Surname"}
-//                     {...formik.getFieldProps('surname')}
-//                 />
-//
-//                 {/*<input type="text" placeholder={'phone'}/>*/}
-//                     Email: <input
-//                     type={"text"}
-//                     placeholder={"Email"}
-//                     {...formik.getFieldProps('email')}
-//                 />
-//
-//                 {/*<input type="text" placeholder={'address'}/>*/}
-//                     Address: <input
-//                     type={"text"}
-//                     placeholder={"Country"}
-//                     {...formik.getFieldProps('country')}
-//                 />
-//                     <input
-//                         type={"text"}
-//                         placeholder={"City"}
-//                         {...formik.getFieldProps('city')}
-//                     />
-//                     <input
-//                         type={"text"}
-//                         placeholder={"Street"}
-//                         {...formik.getFieldProps('street')}
-//                     />
-//
-//                 <button type={'submit'}>ORDER</button>
-//
-//                 {/*<input type="text" placeholder={'name'}/>*/}
-//                 </FormCase>
-//             </form>
-//         </MainOrderCase>
-//     );
-// };
-//
-// export default Order;
-
 import React from 'react';
-import {Field, Form, Formik} from 'formik';
+import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import {FormCase, MainOrderCase} from './OrderStyles';
+import {FormCase, HCase, MainOrderCase} from './OrderStyles';
 import {useDispatch} from "react-redux";
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
 import {orderItems} from "../../Utils/MagUtils";
 import {orderItemsTC} from "../../Features/ItemsAction";
+import {Button, TextField} from "@mui/material";
+import AddCardIcon from '@mui/icons-material/AddCard';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import AddIcon from '@mui/icons-material/Add';
+import FormControl from '@mui/material/FormControl';
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -127,7 +43,7 @@ export const Order = () => {
     const dispatch = useDispatch()
 
     return <MainOrderCase>
-        <h3>Order your magazins</h3>
+        <HCase>Order your magazins</HCase>
         <Formik
             initialValues={{
                 name: '',
@@ -142,47 +58,93 @@ export const Order = () => {
                 // same shape as initial values
                 action.resetForm()
                 orderItems(itemsInBacket, allItems, dispatch)
-                // console.log(values);
-                // alert(` Dear ${values.name},
-                // your magazins will be send
-                // in ${values.city}!
-                // Check your ${values.email}
-                // to confirm =)`)
                 dispatch(orderItemsTC(values.name, values.city, values.email))
             }}
         >
-            {({errors, touched}) => (
+            {({errors, touched,values,handleChange}) => (
                 <Form>
                     <FormCase>
-                        <Field name="name" type={"text"}
-                               placeholder={"Name"}/>
-                        {errors.name && touched.name ? (
-                            <div>{errors.name}</div>
-                        ) : null}
-                        <Field name="surname" type="text" placeholder={'surname'}/>
-                        {errors.surname && touched.surname ? (
-                            <div>{errors.surname}</div>
-                        ) : null}
-                        <Field name="email" type="email" placeholder={"Email"}/>
-                        {errors.email && touched.email ? <div>{errors.email}</div> : null}
-                        <Field name="country" type={"text"}
-                               placeholder={"Country"}/>
-                        {errors.country && touched.country ? (
-                            <div>{errors.country}</div>
-                        ) : null}
-                        <Field name="city" type={"text"}
-                               placeholder={"City"}/>
-                        {errors.city && touched.city ? (
-                            <div>{errors.city}</div>
-                        ) : null}
-                        <Field name="street" type={"text"}
-                               placeholder={"Street"}/>
-                        {errors.street && touched.street ? (
-                            <div>{errors.street}</div>
-                        ) : null}
-
-
-                        <button type="submit">Order</button>
+                        <FormControl>
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                id="name"
+                                name="name"
+                                label="Name"
+                                type="text"
+                                value={values.name}
+                                onChange={handleChange}
+                                error={touched.name && Boolean(errors.name)}
+                                helperText={touched.name && errors.name}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                id="surname"
+                                name="surname"
+                                label="Surname"
+                                type="text"
+                                value={values.surname}
+                                onChange={handleChange}
+                                error={touched.surname && Boolean(errors.surname)}
+                                helperText={touched.surname && errors.surname}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                id="email"
+                                name="email"
+                                label="Email"
+                                type="text"
+                                value={values.email}
+                                onChange={handleChange}
+                                error={touched.email && Boolean(errors.email)}
+                                helperText={touched.email && errors.email}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                id="country"
+                                name="country"
+                                label="Country"
+                                type="text"
+                                value={values.country}
+                                onChange={handleChange}
+                                error={touched.country && Boolean(errors.country)}
+                                helperText={touched.country && errors.country}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                id="city"
+                                name="city"
+                                label="City"
+                                type="text"
+                                value={values.city}
+                                onChange={handleChange}
+                                error={touched.city && Boolean(errors.city)}
+                                helperText={touched.city && errors.city}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                id="street"
+                                name="street"
+                                label="Street"
+                                type="text"
+                                value={values.street}
+                                onChange={handleChange}
+                                error={touched.street && Boolean(errors.street)}
+                                helperText={touched.street && errors.street}
+                            />
+                            <Button variant="contained"
+                                    size="small"
+                                    type="submit"
+                                    style={{backgroundColor: 'rgba(115,77,230,0.7)'}}
+                            >
+                                <AddCardIcon/> <AddIcon/> <LocalShippingIcon/>
+                            </Button>
+                        </FormControl>
                     </FormCase>
                 </Form>
             )}

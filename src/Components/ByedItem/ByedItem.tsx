@@ -5,6 +5,10 @@ import {useDispatch} from "react-redux";
 import {magActions} from "../../Features/ItemsAction";
 import {useMagSelector} from "../../App/store";
 import {deleteItemsFromBacket} from "../../Utils/MagUtils";
+import {IconButton} from "@mui/material";
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 type ByedItemPropsType = {
     item: ItemsType
@@ -20,7 +24,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             return
         } else {
             setAmountX(amountX - 1)
-            dispatch(magActions.changeAmountByedItemAC(_id, amount + 1,totalCost-item.cost))
+            dispatch(magActions.changeAmountByedItemAC(_id, amount + 1, totalCost - item.cost))
         }
     }
     const plusAmount = () => {
@@ -28,11 +32,11 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             return
         } else {
             setAmountX(amountX + 1)
-            dispatch(magActions.changeAmountByedItemAC(_id, amount - 1,totalCost+item.cost))
+            dispatch(magActions.changeAmountByedItemAC(_id, amount - 1, totalCost + item.cost))
         }
     }
     const deleteItenFromBacket = () => {
-        deleteItemsFromBacket(_id,dispatch)
+        deleteItemsFromBacket(_id, dispatch)
         // dispatch(magActions.deleteByedItemFromBacketAC(_id))
         //
         // let res = localStorage.getItem('itemsInBacket')
@@ -48,7 +52,13 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             <ImageCase url={image}/>
             <TextCase>
                 <TCase>{title}
-                    <button onClick={deleteItenFromBacket}>x</button>
+                    {/*<button onClick={deleteItenFromBacket}>x</button>*/}
+                    <IconButton size="small"
+                                edge="start"
+                                color="inherit"
+                                onClick={deleteItenFromBacket}>
+                        <RemoveShoppingCartIcon/>
+                    </IconButton>
                 </TCase>
                 <TxCase>
                     {desc}
@@ -57,9 +67,21 @@ const ByedItem = ({item}: ByedItemPropsType) => {
                 <div style={{margin: '5px 20px'}}>Price: {item.cost}</div>
             </TextCase>
             <TBCase>
-                <button onClick={minusAmount} disabled={amountX === 0}>-</button>
+                <IconButton size="large"
+                            edge="start"
+                            color="inherit"
+                            onClick={plusAmount}
+                            disabled={amountX === maxItemAmount}>
+                    <ExpandLessIcon/>
+                </IconButton>
                 {amountX}
-                <button onClick={plusAmount} disabled={amountX === maxItemAmount}>+</button>
+                <IconButton size="large"
+                            edge="start"
+                            color="inherit"
+                            onClick={minusAmount}
+                            disabled={amountX === 0}>
+                    <ExpandMoreIcon/>
+                </IconButton>
             </TBCase>
 
         </ByedItemCase>

@@ -4,6 +4,8 @@ import {ItemsType} from "../../Api/MagAPI";
 import {useDispatch} from "react-redux";
 import {magActions} from "../../Features/ItemsAction";
 import {useMagSelector} from "../../App/store";
+import {Button} from '@mui/material';
+import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 
 type ItemPropsType = {
     item: ItemsType
@@ -24,8 +26,6 @@ const Item = ({item}: ItemPropsType) => {
             const toLC = [item]
             localStorage.setItem('itemsInBacket', JSON.stringify(toLC))
         }
-
-        // localStorage.setItem('itemsInBacket', JSON.stringify([...itemsInBacket, item]))
     }
 
     return (
@@ -37,7 +37,11 @@ const Item = ({item}: ItemPropsType) => {
                 <TxCase>Amount: {amount}</TxCase>
                 <TBCase>
                     <>Price: {cost}$</>
-                    <button onClick={addToBacket} disabled={!!isAddedToBacket}>Add to backet</button>
+                    <Button variant="contained" disabled={!!isAddedToBacket} onClick={addToBacket}
+                    style={!!isAddedToBacket?{backgroundColor:'rgba(0,217,255,0.05)'}:{backgroundColor:'rgba(0,217,255,0.58)'}}
+                    >Add
+                        to <LocalGroceryStoreIcon style={{height: '15px'}}/></Button>
+                    {/*<button onClick={addToBacket} disabled={!!isAddedToBacket}>Add to backet</button>*/}
                 </TBCase>
             </TextCase>
         </ItemCase>
