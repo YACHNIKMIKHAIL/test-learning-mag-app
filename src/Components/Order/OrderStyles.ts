@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const MainOrderCase = styled.div`
   min-width: 350px;
+  max-height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

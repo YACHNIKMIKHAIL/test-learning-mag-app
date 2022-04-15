@@ -14,8 +14,8 @@ const Backet = () => {
             <ByedItemsCase>
                 {byedItems.length === 0
                     ? <NoItemsInBacket/>
-                    : <>{byedItems.map((m, i) => {
-                        return <ByedItem key={i} item={m}/>
+                    : <>{byedItems.map((m) => {
+                        return <ByedItem key={m._id} item={m}/>
                     })}</>
                 }
             </ByedItemsCase>

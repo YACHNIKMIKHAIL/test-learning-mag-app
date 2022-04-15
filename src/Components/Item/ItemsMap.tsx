@@ -8,7 +8,7 @@ const ItemsMap = () => {
     const items = useMagSelector<ItemsType[]>(state => state.items.items)
     return (
         <ItemsMapCase>
-            {items.map((m,i)=>{return <Item key={i} item={m}/>})}
+            {items.map((m)=>{return <Item key={m._id} item={m}/>})}
         </ItemsMapCase>
     );
 };

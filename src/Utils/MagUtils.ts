@@ -17,8 +17,8 @@ export const orderItems = (itemsInBacket: ItemsType[], allItems: ItemsType[], di
     })
 }
 
-export const deleteItemsFromLCBacket = (_id: string, dispatch: Function) => {
-    dispatch(magActions.deleteByedItemFromBacketAC(_id))
+export const deleteItemsFromLCBacket = (_id: string, dispatch: Function, deletedPrice?: number) => {
+    dispatch(magActions.deleteByedItemFromBacketAC(_id, deletedPrice))
 
     let res = localStorage.getItem('itemsInBacket')
     if (res !== null) {

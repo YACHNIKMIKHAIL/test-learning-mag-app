@@ -52,9 +52,9 @@ const Admin = () => {
                 minWidth: '350px',
 
             }}>
-                {itemsInMag.map((m, i) => {
+                {itemsInMag.map((m) => {
                     return <UpdatedItem
-                        key={i}
+                        key={m._id}
                         _id={m._id}
                         title={m.title}
                         image={m.image}

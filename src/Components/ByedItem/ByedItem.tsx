@@ -14,13 +14,12 @@ type ByedItemPropsType = {
     item: ItemsType
 }
 const ByedItem = ({item}: ByedItemPropsType) => {
-    const {_id, title, image, desc, amount} = item
-
+    const {_id, title, image, desc, amount, cost} = item
     const dispatch = useDispatch()
     const maxItemAmount = useMagSelector<number>(state => state.items.items.filter(f => f._id === _id)[0].amount)
     const currentItemAmount = useMagSelector<number>(state => state.items.byedItems.bItems.filter(f => f._id === _id)[0].amount)
     const totalCost = useMagSelector<number>(state => state.items.byedItems.totalCoast)
-    const [amountX, setAmountX] = useState<number>(maxItemAmount-currentItemAmount)
+    const [amountX, setAmountX] = useState<number>(maxItemAmount - currentItemAmount)
 
     const minusAmount = () => {
         if (amountX === 0) {
@@ -39,7 +38,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
         }
     }
     const deleteItenFromBacket = () => {
-        deleteItemsFromLCBacket(_id, dispatch)
+        deleteItemsFromLCBacket(_id, dispatch, amountX * cost)
     }
     return (
         <ByedItemCase>
@@ -57,7 +56,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
                     {desc}
                 </TxCase>
                 <TxCase>Amount: {amount} </TxCase>
-                <div style={{margin: '5px 20px'}}>Price: {item.cost}</div>
+                <div style={{margin: '5px 20px'}}>Price:<span style={{color: 'hotpink'}}> {item.cost}</span> $</div>
             </TextCase>
             <TBCase>
                 <IconButton size="large"

@@ -52,9 +52,9 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
                 byedItems: {
                     bItems: state.byedItems.bItems.filter(m => m._id !== action.id),
                     totalCoast:
-                    state.byedItems.totalCoast
-                        // -state.byedItems.bItems.filter(m => m._id !== action.id)[0].cost
-                    // *state.byedItems.bItems.filter(m => m._id !== action.id)[0].amount
+                    state.byedItems.totalCoast-action.deletedPrice
+                        // -state.byedItems.bItems.filter(m => m._id === action.id)[0].cost
+                     // *state.byedItems.bItems.filter(m => m._id === action.id)[0].amount
                 }
             }
         }

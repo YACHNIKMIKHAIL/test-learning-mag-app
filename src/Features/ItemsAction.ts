@@ -25,9 +25,9 @@ export const magActions = {
         type: itemsActions.CHANGE_AMOUNT,
         id, amount, totalPrice
     } as const),
-    deleteByedItemFromBacketAC: (id: string) => ({
+    deleteByedItemFromBacketAC: (id: string, deletedPrice = 0) => ({
         type: itemsActions.DELETE_FROM_BACKET,
-        id
+        id, deletedPrice
     } as const),
     resetTotalPriceAC: () => ({
         type: itemsActions.RESET_TOTAL_PRICE,
