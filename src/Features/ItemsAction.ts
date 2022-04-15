@@ -1,5 +1,5 @@
 import {ItemsType, magAPI, PostItemType} from "../Api/MagAPI";
-import {magThunkType} from "../App/store";
+import {magThunkType, reducerType} from "../App/store";
 import {appActions} from "../App/AppReducer";
 import {handleError} from "../Utils/MagUtils";
 
@@ -25,9 +25,9 @@ export const magActions = {
         type: itemsActions.CHANGE_AMOUNT,
         id, amount, totalPrice
     } as const),
-    deleteByedItemFromBacketAC: (id: string, deletedPrice = 0) => ({
+    deleteByedItemFromBacketAC: (id: string, deletedPrice = 0,amount=0) => ({
         type: itemsActions.DELETE_FROM_BACKET,
-        id, deletedPrice
+        id, deletedPrice,amount
     } as const),
     resetTotalPriceAC: () => ({
         type: itemsActions.RESET_TOTAL_PRICE,
@@ -35,7 +35,8 @@ export const magActions = {
     searchItemsAC: (v: string) => ({
         type: itemsActions.SEARCH_ITEMS,
         v
-    } as const)
+    } as const),
+
 }
 
 export const getItemsTC = (): magThunkType => async (dispatch) => {
@@ -113,10 +114,22 @@ export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) 
         dispatch(appActions.setLoad(false))
     }
 }
-export const orderItemsTC = (name: string, city: string, email: string): magThunkType => async (dispatch) => {
+export const orderItemsTC = (name: string, email: string, city: string, street: string): magThunkType => async (dispatch, getState: () => reducerType) => {
     dispatch(appActions.setLoad(true))
+    const restCount =
+        getState().items.byedItems.bItems.reduce((acc, el) => {
+        acc += el.amount
+        return acc
+    }, 0)
+    const price = getState().items.byedItems.totalCoast
+    const itemsNames = getState().items.byedItems.bItems.map(m => {
+        return m.title
+    })
+
+
     try {
-        await magAPI.sendMessage(name, city, email)
+        //name, email, city, street, count, price, itemsNames
+        await magAPI.sendMessage(name, email, city, street, restCount, price, itemsNames)
         dispatch(magActions.resetTotalPriceAC())
         dispatch(appActions.sendedMessage(true))
     } catch (e) {

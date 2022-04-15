@@ -6,7 +6,7 @@ type InitialStateType = {
     items: ItemsType[],
     byedItems: {
         bItems: ItemsType[],
-        totalCoast: number
+        totalCoast: number,
     },
     search: string
 }
@@ -29,8 +29,8 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
                 ...state,
                 // items: state.items.filter(f => f._id !== action.item._id),
                 byedItems: {
+                    ...state.byedItems,
                     bItems: [action.item, ...state.byedItems.bItems],
-                    totalCoast: state.byedItems.totalCoast
                 }
             }
         }
@@ -38,6 +38,7 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
             return {
                 ...state,
                 byedItems: {
+                    ...state.byedItems,
                     bItems: state.byedItems.bItems.map(m => m._id === action.id ? {
                         ...m,
                         amount: action.amount
@@ -51,10 +52,7 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
                 ...state,
                 byedItems: {
                     bItems: state.byedItems.bItems.filter(m => m._id !== action.id),
-                    totalCoast:
-                    state.byedItems.totalCoast-action.deletedPrice
-                        // -state.byedItems.bItems.filter(m => m._id === action.id)[0].cost
-                     // *state.byedItems.bItems.filter(m => m._id === action.id)[0].amount
+                    totalCoast: state.byedItems.totalCoast-action.deletedPrice,
                 }
             }
         }
@@ -62,6 +60,7 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
             return {
                 ...state,
                 byedItems: {
+                    ...state.byedItems,
                     bItems: state.byedItems.bItems,
                     totalCoast: 0
                 }

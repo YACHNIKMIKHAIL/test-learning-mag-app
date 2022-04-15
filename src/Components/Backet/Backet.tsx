@@ -8,7 +8,6 @@ import NoItemsInBacket from "./NoItemsInBacket";
 
 const Backet = () => {
     const byedItems = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
-
     return (
         <BacketCase>
             <ByedItemsCase>
