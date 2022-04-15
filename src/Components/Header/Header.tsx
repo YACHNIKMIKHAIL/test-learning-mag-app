@@ -14,7 +14,6 @@ const Header = () => {
     const itemsInBacket = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
     const search = useMagSelector<string>(state => state.items.search)
     const isLoad = useMagSelector<boolean>(state => state.app.isLoad)
-
     const debouncedSearch = useDebounce<string>(search, 1000)
 
     const goTo = () => {
@@ -36,7 +35,7 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(searchItemsTC(search))
-    }, [debouncedSearch[0]])
+    }, [])
 
     useEffect(() => {
         let res = localStorage.getItem('itemsInBacket')
@@ -63,7 +62,7 @@ const Header = () => {
                 <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>
                 <CCase>
                     <button onClick={goTo}
-                            disabled={itemsInBacket.length === 0 && mode !== 'order' || isLoad}
+                            disabled={(itemsInBacket.length === 0 && mode !== 'order') || isLoad}
                     >Go
                         to {mode === 'bye' ? 'backet' : mode === 'order' ? 'items' : mode === 'admin' ? 'blabla' : ''} </button>
                 </CCase>

@@ -24,15 +24,13 @@ const Main = () => {
 
     return (
         <MainCase>
-            {mode === 'bye'
-                ? <ItemsMap/>
-                : mode === 'order'
-                    ? <Backet/>
-                    : mode === 'admin'
-                        ? <Admin/>
-                        : <></>}
-
-
+                {mode === 'bye'
+                    ? <ItemsMap/>
+                    : mode === 'order'
+                        ? <Backet/>
+                        : mode === 'admin'
+                            ? <Admin/>
+                            : <></>}
         </MainCase>
     );
 };
