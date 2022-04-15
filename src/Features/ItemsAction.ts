@@ -1,6 +1,7 @@
 import {ItemsType, magAPI, PostItemType} from "../Api/MagAPI";
 import {magThunkType} from "../App/store";
 import {appActions} from "../App/AppReducer";
+import {handleError} from "../Utils/MagUtils";
 
 export enum itemsActions {
     GET_ITEMS = 'GET_ITEMS',
@@ -9,10 +10,8 @@ export enum itemsActions {
     DELETE_FROM_BACKET = 'DELETE_FROM_BACKET',
     RESET_TOTAL_PRICE = 'RESET_TOTAL_PRICE',
     SEARCH_ITEMS = 'SEARCH_ITEMS',
-    SEARCH_BYED_ITEMS = 'SEARCH_BYED_ITEMS',
 }
 
-// export type magReturnedActionsType<S> = S extends { [key: string]: infer T } ? T : never
 export const magActions = {
     getItemsAC: (items: ItemsType[]) => ({
         type: itemsActions.GET_ITEMS,
@@ -22,9 +21,9 @@ export const magActions = {
         type: itemsActions.BYE_ITEM,
         item
     } as const),
-    changeAmountByedItemAC: (id: string, amount: number,totalPrice:number) => ({
+    changeAmountByedItemAC: (id: string, amount: number, totalPrice: number) => ({
         type: itemsActions.CHANGE_AMOUNT,
-        id, amount,totalPrice
+        id, amount, totalPrice
     } as const),
     deleteByedItemFromBacketAC: (id: string) => ({
         type: itemsActions.DELETE_FROM_BACKET,
@@ -33,7 +32,7 @@ export const magActions = {
     resetTotalPriceAC: () => ({
         type: itemsActions.RESET_TOTAL_PRICE,
     } as const),
-    searchItemsAC: (v:string) => ({
+    searchItemsAC: (v: string) => ({
         type: itemsActions.SEARCH_ITEMS,
         v
     } as const)
@@ -45,22 +44,26 @@ export const getItemsTC = (): magThunkType => async (dispatch) => {
         let res = await magAPI.getItems()
         if (res) {
             dispatch(magActions.getItemsAC(res))
+        } else {
+            handleError('Some troubles ...', dispatch)
         }
     } catch (e) {
-
+        handleError(e, dispatch)
     } finally {
         dispatch(appActions.setLoad(false))
     }
 }
-export const searchItemsTC = (s:string): magThunkType => async (dispatch) => {
+export const searchItemsTC = (s: string): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.searchItems(s)
         if (res) {
             dispatch(magActions.getItemsAC(res))
+        } else {
+            handleError('Some troubles ...', dispatch)
         }
     } catch (e) {
-
+        handleError(e, dispatch)
     } finally {
         dispatch(appActions.setLoad(false))
     }
@@ -70,11 +73,12 @@ export const postItemTC = (item: PostItemType): magThunkType => async (dispatch)
     try {
         let res = await magAPI.postItem(item)
         if (res) {
-            // alert('Success!')
             dispatch(getItemsTC())
+        } else {
+            handleError('Some troubles ...', dispatch)
         }
     } catch (e) {
-
+        handleError(e, dispatch)
     } finally {
         dispatch(appActions.setLoad(false))
     }
@@ -84,11 +88,12 @@ export const deleteItemTC = (id: string): magThunkType => async (dispatch) => {
     try {
         let res = await magAPI.deleteItem(id)
         if (res) {
-            // alert('Success!')
             dispatch(getItemsTC())
+        } else {
+            handleError('Some troubles ...', dispatch)
         }
     } catch (e) {
-
+        handleError(e, dispatch)
     } finally {
         dispatch(appActions.setLoad(false))
     }
@@ -98,22 +103,24 @@ export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) 
     try {
         let res = await magAPI.updateItem(item)
         if (res) {
-            // alert('Success!')
             dispatch(getItemsTC())
+        } else {
+            handleError('Some troubles ...', dispatch)
         }
     } catch (e) {
-
+        handleError(e, dispatch)
     } finally {
         dispatch(appActions.setLoad(false))
     }
 }
-export const orderItemsTC = (name:string,city:string,email:string): magThunkType => async (dispatch) => {
+export const orderItemsTC = (name: string, city: string, email: string): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
         await magAPI.sendMessage(name, city, email)
-            dispatch(magActions.resetTotalPriceAC())
+        dispatch(magActions.resetTotalPriceAC())
+        dispatch(appActions.sendedMessage(true))
     } catch (e) {
-
+        handleError(e, dispatch)
     } finally {
         dispatch(appActions.setLoad(false))
     }

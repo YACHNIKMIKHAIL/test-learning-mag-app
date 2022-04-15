@@ -4,7 +4,7 @@ import {ItemsType} from "../../Api/MagAPI";
 import {useDispatch} from "react-redux";
 import {magActions} from "../../Features/ItemsAction";
 import {useMagSelector} from "../../App/store";
-import {deleteItemsFromBacket} from "../../Utils/MagUtils";
+import {deleteItemsFromLCBacket} from "../../Utils/MagUtils";
 import {IconButton} from "@mui/material";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -39,7 +39,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
         }
     }
     const deleteItenFromBacket = () => {
-        deleteItemsFromBacket(_id, dispatch)
+        deleteItemsFromLCBacket(_id, dispatch)
     }
     return (
         <ByedItemCase>

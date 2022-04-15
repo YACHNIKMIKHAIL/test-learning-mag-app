@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {alpha, styled} from '@mui/material/styles';
+import {alpha,styled} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,9 +17,9 @@ import {ItemsType} from "../../Api/MagAPI";
 import {useDebounce} from "use-debounce";
 import {useEffect} from "react";
 import {magActions, searchItemsTC} from "../../Features/ItemsAction";
-import {CCase} from "./HeaderStyles";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import styledC from 'styled-components';
 
 const headerStyle = {
     backgroundColor: 'rgba(0,217,255,0.58)',
@@ -163,3 +163,13 @@ export default function MuiHeader() {
         </Box>
     );
 }
+
+export const CCase = styledC.div`
+  margin: 0 10px 0 auto;
+  width: 60px;
+  font-size: 20px;
+  color:white;
+  background-color:rgba(115, 77, 230, 0.51);
+  text-align: center;
+  border-radius: 10px;
+`

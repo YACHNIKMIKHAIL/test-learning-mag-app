@@ -14,6 +14,3 @@ export const ByedItemsCase = styled.div`
   align-items: center;
   overflow: auto;
 `
-export const OrderCase = styled.div`
-  
-`

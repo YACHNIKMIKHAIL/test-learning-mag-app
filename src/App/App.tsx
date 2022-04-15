@@ -4,12 +4,14 @@ import '../App.css';
 import img from '../Images/wallpaperflare.com_wallpaper.jpg';
 import Main from "../Components/Main/Main";
 import MuiHeader from "../Components/Header/MuiHeader";
+import AlertComponent from "../Components/SnaskBar/Alert";
 
 function App() {
     return (
         <AppCase>
             <MuiHeader/>
             <Main/>
+            <AlertComponent/>
         </AppCase>
     );
 }
