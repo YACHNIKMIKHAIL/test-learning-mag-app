@@ -25,8 +25,6 @@ export default function AlertComponent() {
         dispatch(appActions.setError(null))
         dispatch(appActions.sendedMessage(false))
     };
-    console.log(isMessageSended)
-
 
     return (
         <>
