@@ -9,6 +9,7 @@ export enum itemsActions {
     DELETE_FROM_BACKET = 'DELETE_FROM_BACKET',
     RESET_TOTAL_PRICE = 'RESET_TOTAL_PRICE',
     SEARCH_ITEMS = 'SEARCH_ITEMS',
+    SEARCH_BYED_ITEMS = 'SEARCH_BYED_ITEMS',
 }
 
 // export type magReturnedActionsType<S> = S extends { [key: string]: infer T } ? T : never
@@ -35,7 +36,7 @@ export const magActions = {
     searchItemsAC: (v:string) => ({
         type: itemsActions.SEARCH_ITEMS,
         v
-    } as const),
+    } as const)
 }
 
 export const getItemsTC = (): magThunkType => async (dispatch) => {

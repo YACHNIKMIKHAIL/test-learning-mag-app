@@ -93,7 +93,7 @@ export default function MuiHeader() {
     }
 
     useEffect(() => {
-        dispatch(searchItemsTC(search))
+            dispatch(searchItemsTC(search))
     }, [ds])
 
     useEffect(() => {
@@ -128,7 +128,7 @@ export default function MuiHeader() {
                     >
                         MY <span onClick={goToAdm}>TEST</span> MAG <span onClick={goToBack}>APP</span>
                     </Typography>
-                    <Search>
+                    {mode==='bye'&&<Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
                         </SearchIconWrapper>
@@ -139,9 +139,10 @@ export default function MuiHeader() {
                             disabled={isLoad}
                             onChange={(e) => dispatch(magActions.searchItemsAC(e.currentTarget.value))}
                         />
-                    </Search>
-                    <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>
-                    <Box sx={{flexGrow: 1, textAlign: 'right'}} onClick={goTo}>
+                    </Search>}
+                    {/*<CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>*/}
+                    <Box sx={{flexGrow: 1, textAlign: 'right',display:'flex',alignItems:'center'}} onClick={goTo}>
+                        <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>
                         <IconButton size="large"
                                     edge="start"
                                     color="inherit"

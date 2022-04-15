@@ -26,6 +26,8 @@ export const PBCase = styled.div`
   color: #4DACE8;
 `
 export const CCase = styled.div`
-  margin: 0 10px;
+  margin: 0 10px 0 auto;
   width: 60px;
+  font-size: 20px;
+  color:hotpink;
 `

@@ -4,6 +4,7 @@ import ByedItem from "../ByedItem/ByedItem";
 import {BacketCase, ByedItemsCase, OrderCase} from './BacketStyles';
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
+import NoItemsInBacket from "./NoItemsInBacket";
 
 const Backet = () => {
     const byedItems = useMagSelector<ItemsType[]>(state => state.items.byedItems.bItems)
@@ -12,7 +13,7 @@ const Backet = () => {
         <BacketCase>
             <ByedItemsCase>
                 {byedItems.length === 0
-                    ? <div>No items in backet</div>
+                    ? <NoItemsInBacket/>
                     : <>{byedItems.map((m, i) => {
                         return <ByedItem key={i} item={m}/>
                     })}</>

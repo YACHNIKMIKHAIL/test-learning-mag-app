@@ -52,7 +52,6 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             <ImageCase url={image}/>
             <TextCase>
                 <TCase>{title}
-                    {/*<button onClick={deleteItenFromBacket}>x</button>*/}
                     <IconButton size="small"
                                 edge="start"
                                 color="inherit"
