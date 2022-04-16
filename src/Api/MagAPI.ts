@@ -2,14 +2,14 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://localhost:9001/items'
-    // baseURL: 'https://test-server-express.herokuapp.com/items'
+    // baseURL: 'http://localhost:9001/items'
+    baseURL: 'https://test-server-express.herokuapp.com/items'
 })
 
 export const magAPI = {
     getItems() {
         // console.log(window.location.search)
-        return instance.get<Array<ItemsType>>(`/${window.location.search}`)
+        return instance.get<Array<ItemsType>>(`/`)
             .then(res => {
                 return res.data
             })
@@ -18,8 +18,7 @@ export const magAPI = {
             })
     },
     searchItems(s: string) {
-        // console.log(window.location.search)
-        return instance.get(`/?search=${s}`,)
+        return instance.get(`/search/${s}`,)
             .then(res => {
                 return res.data
             })

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {alpha,styled} from '@mui/material/styles';
+import {useEffect} from 'react';
+import {alpha, styled} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +16,6 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
 import {useDebounce} from "use-debounce";
-import {useEffect} from "react";
 import {magActions, searchItemsTC} from "../../Features/ItemsAction";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -93,7 +93,8 @@ export default function MuiHeader() {
     }
 
     useEffect(() => {
-            dispatch(searchItemsTC(search))
+        if (search === '') return
+        dispatch(searchItemsTC(search))
     }, [ds])
 
     useEffect(() => {
@@ -128,7 +129,7 @@ export default function MuiHeader() {
                     >
                         MY <span onClick={goToAdm}>TEST</span> MAG <span onClick={goToBack}>APP</span>
                     </Typography>
-                    {mode==='bye'&&<Search>
+                    {mode === 'bye' && <Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
                         </SearchIconWrapper>
@@ -141,12 +142,13 @@ export default function MuiHeader() {
                         />
                     </Search>}
                     {/*<CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>*/}
-                    <Box sx={{flexGrow: 1, textAlign: 'right',display:'flex',alignItems:'center',margin:'0 10px'}} onClick={goTo}>
+                    <Box sx={{flexGrow: 1, textAlign: 'right', display: 'flex', alignItems: 'center', margin: '0 10px'}}
+                         onClick={goTo}>
                         <CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>
                         <IconButton size="large"
                                     edge="start"
                                     color="inherit"
-                        disabled={(itemsInBacket.length === 0 && mode !== 'order') || isLoad}>
+                                    disabled={(itemsInBacket.length === 0 && mode !== 'order') || isLoad}>
                             <Badge badgeContent={itemsInBacket.length} color="error">
                                 {mode === 'bye'
                                     ? <LocalGroceryStoreIcon/>
