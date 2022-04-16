@@ -1,7 +1,7 @@
 import {ItemsType, magAPI, PostItemType} from "../Api/MagAPI";
 import {magThunkType, reducerType} from "../App/store";
 import {appActions} from "../App/AppReducer";
-import {handleError} from "../Utils/MagUtils";
+import {byedAmountFunc, handleError} from "../Utils/MagUtils";
 
 export enum itemsActions {
     GET_ITEMS = 'GET_ITEMS',
@@ -116,31 +116,12 @@ export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) 
 }
 export const orderItemsTC = (name: string, email: string, city: string, street: string): magThunkType => async (dispatch, getState: () => reducerType) => {
     dispatch(appActions.setLoad(true))
-    const restCount =
-        getState().items.byedItems.bItems.reduce((acc, el) => {
-            acc += el.amount
-            return acc
-        }, 0)
     const price = getState().items.byedItems.totalCoast
     const itemsNames = getState().items.byedItems.bItems.map(m => {
         return m.title
     })
-
-    let allCount: ItemsType[] = []
-    for (let i = 0; i < itemsNames.length; i++) {
-        let item = getState().items.items.filter(f => f.title === itemsNames[i])[0]
-        allCount.push(item)
-    }
-
-    const allAmount = allCount.reduce((acc, el) => {
-        acc += el.amount
-        return acc
-    }, 0)
-
-    debugger
     try {
-        //name, email, city, street, count, price, itemsNames
-        await magAPI.sendMessage(name, email, city, street, allAmount - restCount, price, itemsNames)
+        await magAPI.sendMessage(name, email, city, street, byedAmountFunc(itemsNames, getState), price, itemsNames)
         dispatch(magActions.resetTotalPriceAC())
         dispatch(appActions.sendedMessage(true))
     } catch (e) {

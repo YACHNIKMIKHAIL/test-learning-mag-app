@@ -1,6 +1,6 @@
 import {ItemsType} from "../Api/MagAPI";
 import {deleteItemTC, magActions, updateItemTC} from "../Features/ItemsAction";
-import {ActionsType} from "../App/store";
+import {ActionsType, reducerType} from "../App/store";
 import {Dispatch} from "redux";
 import {appActions} from "../App/AppReducer";
 
@@ -44,4 +44,25 @@ export const addItemToLCBacket = (item: ItemsType, dispatch: Function) => {
 
 export const handleError = (err: any, dispatch: Dispatch<ActionsType>) => {
     dispatch(appActions.setError(err))
+}
+
+export const byedAmountFunc = (itemsNames:string[],getState: () => reducerType) => {
+    const restCount =
+        getState().items.byedItems.bItems.reduce((acc, el) => {
+            acc += el.amount
+            return acc
+        }, 0)
+
+    let allCount: ItemsType[] = []
+    for (let i = 0; i < itemsNames.length; i++) {
+        let item = getState().items.items.filter(f => f.title === itemsNames[i])[0]
+        allCount.push(item)
+    }
+
+    const allAmount = allCount.reduce((acc, el) => {
+        acc += el.amount
+        return acc
+    }, 0)
+
+    return allAmount - restCount
 }
