@@ -25,9 +25,9 @@ export const magActions = {
         type: itemsActions.CHANGE_AMOUNT,
         id, amount, totalPrice
     } as const),
-    deleteByedItemFromBacketAC: (id: string, deletedPrice = 0,amount=0) => ({
+    deleteByedItemFromBacketAC: (id: string, deletedPrice = 0, amount = 0) => ({
         type: itemsActions.DELETE_FROM_BACKET,
-        id, deletedPrice,amount
+        id, deletedPrice, amount
     } as const),
     resetTotalPriceAC: () => ({
         type: itemsActions.RESET_TOTAL_PRICE,
@@ -118,18 +118,29 @@ export const orderItemsTC = (name: string, email: string, city: string, street: 
     dispatch(appActions.setLoad(true))
     const restCount =
         getState().items.byedItems.bItems.reduce((acc, el) => {
-        acc += el.amount
-        return acc
-    }, 0)
+            acc += el.amount
+            return acc
+        }, 0)
     const price = getState().items.byedItems.totalCoast
     const itemsNames = getState().items.byedItems.bItems.map(m => {
         return m.title
     })
 
+    let allCount: ItemsType[] = []
+    for (let i = 0; i < itemsNames.length; i++) {
+        let item = getState().items.items.filter(f => f.title === itemsNames[i])[0]
+        allCount.push(item)
+    }
 
+    const allAmount = allCount.reduce((acc, el) => {
+        acc += el.amount
+        return acc
+    }, 0)
+
+    debugger
     try {
         //name, email, city, street, count, price, itemsNames
-        await magAPI.sendMessage(name, email, city, street, restCount, price, itemsNames)
+        await magAPI.sendMessage(name, email, city, street, allAmount - restCount, price, itemsNames)
         dispatch(magActions.resetTotalPriceAC())
         dispatch(appActions.sendedMessage(true))
     } catch (e) {
