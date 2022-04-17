@@ -1,10 +1,11 @@
 import {ActionsType} from "./store";
+import {AxiosError} from "axios";
 
 export type ModeType = 'bye' | 'order' | 'admin'
 type InitialAppStateType = {
     mode: ModeType,
     isLoad: boolean,
-    error: string | null
+    error: string | AxiosError | null
     messageSended: boolean
 }
 
@@ -40,7 +41,6 @@ export const appReducer = (state = initialAppState, action: ActionsType): Initia
             return state
     }
 }
-
 
 
 // type AppActionsType = ReturnType<magReturnedActionsType<typeof appActions>>

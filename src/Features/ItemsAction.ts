@@ -1,7 +1,9 @@
 import {ItemsType, magAPI, PostItemType} from "../Api/MagAPI";
-import {magThunkType, reducerType} from "../App/store";
+import {reducerType} from "../App/store";
 import {appActions} from "../App/AppReducer";
 import {byedAmountFunc, handleError} from "../Utils/MagUtils";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import {AxiosError} from "axios";
 
 export enum itemsActions {
     GET_ITEMS = 'GET_ITEMS',
@@ -36,103 +38,202 @@ export const magActions = {
         type: itemsActions.SEARCH_ITEMS,
         v
     } as const),
-
 }
 
-export const getItemsTC = (): magThunkType => async (dispatch) => {
-    dispatch(appActions.setLoad(true))
+// export const getItemsTC_ = (): magThunkType => async (dispatch) => {
+//     dispatch(appActions.setLoad(true))
+//     try {
+//         let res = await magAPI.getItems()
+//         if (res) {
+//             dispatch(magActions.getItemsAC(res))
+//         } else {
+//             handleError('Some troubles ...', dispatch)
+//         }
+//     } catch (e) {
+//         handleError(e, dispatch)
+//     } finally {
+//         dispatch(appActions.setLoad(false))
+//     }
+// }
+export type FielErrorType = { field: string, error: string }
+export type ThunkErrorAPIConfigType = {
+    rejectValue: { errors?: string[], fieldsErrors?: FielErrorType[] }
+}
+export const getItemsTC = createAsyncThunk<{}, undefined, ThunkErrorAPIConfigType>(itemsActions.GET_ITEMS, async (undefined, thunkAPI) => {
+    thunkAPI.dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.getItems()
-        if (res) {
-            dispatch(magActions.getItemsAC(res))
-        } else {
-            handleError('Some troubles ...', dispatch)
+        if(res){
+            thunkAPI.dispatch(magActions.getItemsAC(res))
+            return {res}
         }
-    } catch (e) {
-        handleError(e, dispatch)
+    } catch (e: any) {
+        const err: AxiosError = e
+        return handleError(err, thunkAPI)
     } finally {
-        dispatch(appActions.setLoad(false))
+        thunkAPI.dispatch(appActions.setLoad(false))
     }
-}
-export const searchItemsTC = (s: string): magThunkType => async (dispatch) => {
-    dispatch(appActions.setLoad(true))
+})
+
+// export const searchItemsTC_ = (s: string): magThunkType => async (dispatch) => {
+//     dispatch(appActions.setLoad(true))
+//     try {
+//         let res = await magAPI.searchItems(s)
+//         debugger
+//         if (res) {
+//             if (res === 'No items') {
+//                 dispatch(magActions.getItemsAC([]))
+//                 handleError(res, dispatch)
+//             } else {
+//                 dispatch(magActions.getItemsAC(res))
+//             }
+//         } else {
+//             handleError('Some troubles ...', dispatch)
+//         }
+//     } catch (e) {
+//         handleError(e, dispatch)
+//     } finally {
+//         dispatch(appActions.setLoad(false))
+//     }
+// }
+
+export const searchItemsTC = createAsyncThunk<{ s: string }, string, ThunkErrorAPIConfigType>(itemsActions.SEARCH_ITEMS, async (s, thunkAPI) => {
+    thunkAPI.dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.searchItems(s)
-        debugger
-        if (res) {
-            if(res==='No items'){
-                dispatch(magActions.getItemsAC([]))
-                handleError(res, dispatch)
-            }else {
-                dispatch(magActions.getItemsAC(res))
-            }
-        } else {
-            handleError('Some troubles ...', dispatch)
-        }
-    } catch (e) {
-        handleError(e, dispatch)
+        thunkAPI.dispatch(magActions.getItemsAC(res))
+        return {res}
+    } catch (e: any) {
+        const err: AxiosError = e
+        return handleError(err, thunkAPI)
     } finally {
-        dispatch(appActions.setLoad(false))
+        thunkAPI.dispatch(appActions.setLoad(false))
     }
-}
-export const postItemTC = (item: PostItemType): magThunkType => async (dispatch) => {
-    dispatch(appActions.setLoad(true))
+})
+// export const postItemTC_ = (item: PostItemType): magThunkType => async (dispatch) => {
+//     dispatch(appActions.setLoad(true))
+//     try {
+//         let res = await magAPI.postItem(item)
+//         if (res) {
+//             dispatch(getItemsTC())
+//         }
+//     } catch (e) {
+//         handleError(e, dispatch)
+//     } finally {
+//         dispatch(appActions.setLoad(false))
+//     }
+// }
+export const postItemTC = createAsyncThunk<{ item: PostItemType }, PostItemType, ThunkErrorAPIConfigType>('f', async (item, thunkAPI) => {
+    thunkAPI.dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.postItem(item)
         if (res) {
-            dispatch(getItemsTC())
-        } else {
-            handleError('Some troubles ...', dispatch)
+            thunkAPI.dispatch(getItemsTC())
         }
-    } catch (e) {
-        handleError(e, dispatch)
+    } catch (e: any) {
+        const err: AxiosError = e
+        return handleError(err, thunkAPI)
     } finally {
-        dispatch(appActions.setLoad(false))
+        thunkAPI.dispatch(appActions.setLoad(false))
     }
-}
-export const deleteItemTC = (id: string): magThunkType => async (dispatch) => {
-    dispatch(appActions.setLoad(true))
+})
+
+// export const deleteItemTC_ = (id: string): magThunkType => async (dispatch) => {
+//     dispatch(appActions.setLoad(true))
+//     try {
+//         let res = await magAPI.deleteItem(id)
+//         if (res) {
+//             dispatch(getItemsTC())
+//         } else {
+//             handleError('Some troubles ...', dispatch)
+//         }
+//     } catch (e) {
+//         handleError(e, dispatch)
+//     } finally {
+//         dispatch(appActions.setLoad(false))
+//     }
+// }
+
+export const deleteItemTC = createAsyncThunk<{ id: string }, string, ThunkErrorAPIConfigType>('f', async (id, thunkAPI) => {
+    thunkAPI.dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.deleteItem(id)
         if (res) {
-            dispatch(getItemsTC())
-        } else {
-            handleError('Some troubles ...', dispatch)
+            thunkAPI.dispatch(getItemsTC())
         }
-    } catch (e) {
-        handleError(e, dispatch)
+    } catch (e: any) {
+        const err: AxiosError = e
+        return handleError(err, thunkAPI)
     } finally {
-        dispatch(appActions.setLoad(false))
+        thunkAPI.dispatch(appActions.setLoad(false))
     }
-}
-export const updateItemTC = (item: ItemsType): magThunkType => async (dispatch) => {
-    dispatch(appActions.setLoad(true))
+})
+
+// export const updateItemTC_ = (item: ItemsType): magThunkType => async (dispatch) => {
+//     dispatch(appActions.setLoad(true))
+//     try {
+//         let res = await magAPI.updateItem(item)
+//         if (res) {
+//             dispatch(getItemsTC())
+//         } else {
+//             handleError('Some troubles ...', dispatch)
+//         }
+//     } catch (e) {
+//         handleError(e, dispatch)
+//     } finally {
+//         dispatch(appActions.setLoad(false))
+//     }
+// }
+export const updateItemTC = createAsyncThunk<{ item: ItemsType }, ItemsType, ThunkErrorAPIConfigType>('f', async (item, thunkAPI) => {
+    thunkAPI.dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.updateItem(item)
         if (res) {
-            dispatch(getItemsTC())
-        } else {
-            handleError('Some troubles ...', dispatch)
+            thunkAPI.dispatch(getItemsTC())
         }
-    } catch (e) {
-        handleError(e, dispatch)
+    } catch (e: any) {
+        const err: AxiosError = e
+        return handleError(err, thunkAPI)
     } finally {
-        dispatch(appActions.setLoad(false))
+        thunkAPI.dispatch(appActions.setLoad(false))
     }
-}
-export const orderItemsTC = (name: string, email: string, city: string, street: string): magThunkType => async (dispatch, getState: () => reducerType) => {
+})
+
+
+
+// export const orderItemsTC_ = (name: string, email: string, city: string, street: string): magThunkType => async (dispatch, getState: () => reducerType) => {
+//     dispatch(appActions.setLoad(true))
+//     const price = getState().items.byedItems.totalCoast
+//     const itemsNames = getState().items.byedItems.bItems.map(m => {
+//         return m.title
+//     })
+//     try {
+//         await magAPI.sendMessage(name, email, city, street, byedAmountFunc(itemsNames, getState), price, itemsNames)
+//         dispatch(magActions.resetTotalPriceAC())
+//         dispatch(appActions.sendedMessage(true))
+//     } catch (e) {
+//         handleError(e, dispatch)
+//     } finally {
+//         dispatch(appActions.setLoad(false))
+//     }
+// }
+export const orderItemsTC = createAsyncThunk<{ name: string, email: string, city: string, street: string }, { name: string, email: string, city: string, street: string }, ThunkErrorAPIConfigType>('f', async (params, thunkAPI) => {
+    const {dispatch,getState}=thunkAPI
+    const state = getState() as reducerType
+
     dispatch(appActions.setLoad(true))
-    const price = getState().items.byedItems.totalCoast
-    const itemsNames = getState().items.byedItems.bItems.map(m => {
+    const price = state.items.byedItems.totalCoast
+    const itemsNames = state.items.byedItems.bItems.map(m => {
         return m.title
     })
     try {
-        await magAPI.sendMessage(name, email, city, street, byedAmountFunc(itemsNames, getState), price, itemsNames)
+        await magAPI.sendMessage(params.name, params.email, params.city, params.street, byedAmountFunc(itemsNames, state), price, itemsNames)
         dispatch(magActions.resetTotalPriceAC())
         dispatch(appActions.sendedMessage(true))
-    } catch (e) {
-        handleError(e, dispatch)
+    } catch (e: any) {
+        const err: AxiosError = e
+        return handleError(err, thunkAPI)
     } finally {
-        dispatch(appActions.setLoad(false))
+        thunkAPI.dispatch(appActions.setLoad(false))
     }
-}
+})

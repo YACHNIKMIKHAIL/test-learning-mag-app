@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {useMagSelector} from "../../App/store";
 import {appActions} from "../../App/AppReducer";
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
+import {AxiosError} from "axios";
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -15,7 +16,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function AlertComponent() {
-    const errorMessage = useMagSelector<string | null>(state => state.app.error)
+    const errorMessage = useMagSelector<string | null | AxiosError>(state => state.app.error)
     const isMessageSended = useMagSelector<boolean>(state => state.app.messageSended)
     const dispatch = useDispatch()
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {

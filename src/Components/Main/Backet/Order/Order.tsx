@@ -60,7 +60,12 @@ export const Order = () => {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, action) => {
-                dispatch(orderItemsTC(values.name, values.email, values.city,values.street))
+                dispatch(orderItemsTC({
+                    name: values.name,
+                    email: values.email,
+                    city: values.city,
+                    street: values.street
+                }))
                 // same shape as initial values
                 action.resetForm()
                 orderItems(itemsInBacket, allItems, dispatch)
