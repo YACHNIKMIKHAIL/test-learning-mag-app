@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import Item from "./Item";
-import {useMagSelector} from "../../App/store";
-import {ItemsType} from "../../Api/MagAPI";
+import {useMagSelector} from "../../../App/store";
+import {ItemsType} from "../../../Api/MagAPI";
 
 const ItemsMap = () => {
     const items = useMagSelector<ItemsType[]>(state => state.items.items)

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {deleteItemTC, updateItemTC} from "../../Features/ItemsAction";
+import {deleteItemTC, updateItemTC} from "../../../Features/ItemsAction";
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
 

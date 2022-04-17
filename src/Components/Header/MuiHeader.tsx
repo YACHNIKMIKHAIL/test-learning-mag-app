@@ -16,7 +16,7 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
 import {useDebounce} from "use-debounce";
-import {magActions, searchItemsTC} from "../../Features/ItemsAction";
+import {getItemsTC, magActions, searchItemsTC} from "../../Features/ItemsAction";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import styledC from 'styled-components';
@@ -93,8 +93,11 @@ export default function MuiHeader() {
     }
 
     useEffect(() => {
-        if (search === '') return
-        dispatch(searchItemsTC(search))
+        if (search === '') {
+            dispatch(getItemsTC())
+        } else {
+            dispatch(searchItemsTC(search))
+        }
     }, [ds])
 
     useEffect(() => {

@@ -58,8 +58,14 @@ export const searchItemsTC = (s: string): magThunkType => async (dispatch) => {
     dispatch(appActions.setLoad(true))
     try {
         let res = await magAPI.searchItems(s)
+        debugger
         if (res) {
-            dispatch(magActions.getItemsAC(res))
+            if(res==='No items'){
+                dispatch(magActions.getItemsAC([]))
+                handleError(res, dispatch)
+            }else {
+                dispatch(magActions.getItemsAC(res))
+            }
         } else {
             handleError('Some troubles ...', dispatch)
         }

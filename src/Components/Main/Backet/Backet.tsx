@@ -1,9 +1,9 @@
 import React from 'react';
-import {Order} from "../Order/Order";
-import ByedItem from "../ByedItem/ByedItem";
+import {Order} from "./Order/Order";
+import ByedItem from "./ByedItem/ByedItem";
 import {BacketCase, ByedItemsCase} from './BacketStyles';
-import {useMagSelector} from "../../App/store";
-import {ItemsType} from "../../Api/MagAPI";
+import {useMagSelector} from "../../../App/store";
+import {ItemsType} from "../../../Api/MagAPI";
 import NoItemsInBacket from "./NoItemsInBacket";
 
 const Backet = () => {

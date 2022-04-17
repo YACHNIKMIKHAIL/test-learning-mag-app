@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {postItemTC} from "../../Features/ItemsAction";
+import {postItemTC} from "../../../Features/ItemsAction";
 import {useDispatch} from "react-redux";
-import {useMagSelector} from "../../App/store";
-import {ItemsType} from "../../Api/MagAPI";
+import {useMagSelector} from "../../../App/store";
+import {ItemsType} from "../../../Api/MagAPI";
 import UpdatedItem from "./UpdatedItem";
 
 const Admin = () => {

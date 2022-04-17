@@ -2,8 +2,8 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: true,
-    // baseURL: 'http://localhost:9001/items'
-    baseURL: 'https://test-server-express.herokuapp.com/items'
+    baseURL: 'http://localhost:9001/items'
+    // baseURL: 'https://test-server-express.herokuapp.com/items'
 })
 
 export const magAPI = {

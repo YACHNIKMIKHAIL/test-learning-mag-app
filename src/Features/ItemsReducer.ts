@@ -52,7 +52,7 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
                 ...state,
                 byedItems: {
                     bItems: state.byedItems.bItems.filter(m => m._id !== action.id),
-                    totalCoast: state.byedItems.totalCoast-action.deletedPrice,
+                    totalCoast: state.byedItems.totalCoast - action.deletedPrice,
                 }
             }
         }
@@ -69,7 +69,7 @@ export const itemsReducer = (state = initialState, action: ActionsType): Initial
         case itemsActions.SEARCH_ITEMS: {
             return {
                 ...state,
-                search:action.v
+                search: action.v
             }
         }
         default:

@@ -1,11 +1,11 @@
 import React from 'react';
 import {ImageCase, ItemCase, TBCase, TCase, TextCase, TxCase} from './ItemStyles';
-import {ItemsType} from "../../Api/MagAPI";
+import {ItemsType} from "../../../Api/MagAPI";
 import {useDispatch} from "react-redux";
-import {useMagSelector} from "../../App/store";
+import {useMagSelector} from "../../../App/store";
 import {Button} from '@mui/material';
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
-import {addItemToLCBacket} from "../../Utils/MagUtils";
+import {addItemToLCBacket} from "../../../Utils/MagUtils";
 
 type ItemPropsType = {
     item: ItemsType
