@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {ByedItemCase, ImageCase, TBCase, TCase, TextCase, TxCase} from './ByedItemStyle';
 import {ItemsType} from "../../../../Api/MagAPI";
 import {useDispatch} from "react-redux";
-import {magActions} from "../../../../Features/ItemsAction";
 import {useMagSelector} from "../../../../App/store";
 import {deleteItemsFromLCBacket} from "../../../../Utils/MagUtils";
 import {IconButton} from "@mui/material";

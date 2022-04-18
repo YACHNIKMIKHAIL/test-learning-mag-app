@@ -1,5 +1,5 @@
 import {ItemsType} from "../Api/MagAPI";
-import {deleteItemTC, magActions, updateItemTC} from "../Features/ItemsAction";
+import {deleteItemTC, updateItemTC} from "../Features/ItemsAction";
 import {reducerType} from "../App/store";
 import {AxiosError} from "axios";
 import {byeItem, deleteByedItemFromBacket} from "../Features/ItemsReducer";
@@ -18,7 +18,7 @@ export const orderItems = (itemsInBacket: ItemsType[], allItems: ItemsType[], di
 }
 
 export const deleteItemsFromLCBacket = (_id: string, dispatch: Function, deletedPrice?: number) => {
-    dispatch(deleteByedItemFromBacket({id:_id, deletedPrice:deletedPrice, amount: 0}))
+    dispatch(deleteByedItemFromBacket({id: _id, deletedPrice: deletedPrice, amount: 0}))
 
     let res = localStorage.getItem('itemsInBacket')
     if (res !== null) {
@@ -54,15 +54,15 @@ export const handleError = (err: AxiosError, thunkAPI: thunkAPIType, showError =
     return thunkAPI.rejectWithValue({errors: [err.message], fieldsErrors: undefined})
 }
 
-export const byedAmountFunc = (itemsNames:string[],state: reducerType) => {
+export const byedAmountFunc = (itemsNames: string[], state: reducerType) => {
     const restCount = state.items.byedItems.bItems.reduce((acc: number, el: ItemsType) => {
-            acc += el.amount
-            return acc
-        }, 0)
+        acc += el.amount
+        return acc
+    }, 0)
 
     let allCount: ItemsType[] = []
     for (let i = 0; i < itemsNames.length; i++) {
-        let item = state.items.items.filter((f:ItemsType) => f.title === itemsNames[i])[0]
+        let item = state.items.items.filter((f: ItemsType) => f.title === itemsNames[i])[0]
         allCount.push(item)
     }
 

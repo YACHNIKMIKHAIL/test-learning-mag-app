@@ -74,7 +74,7 @@ export default function MuiHeader() {
     const search = useMagSelector<string>(state => state.items.search)
     const isLoad = useMagSelector<boolean>(state => state.app.isLoad)
     const debouncedSearch = useDebounce<string>(search, 1500)
-    const [ds, ddss] = debouncedSearch
+    const [ds] = debouncedSearch
 
     const goTo = () => {
         if (mode === 'bye') {
