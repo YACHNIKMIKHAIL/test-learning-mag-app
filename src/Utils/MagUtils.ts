@@ -1,8 +1,8 @@
 import {ItemsType} from "../Api/MagAPI";
 import {deleteItemTC, magActions, updateItemTC} from "../Features/ItemsAction";
 import {reducerType} from "../App/store";
-import {appActions} from "../App/AppReducer";
 import {AxiosError} from "axios";
+import {byeItem, deleteByedItemFromBacket} from "../Features/ItemsReducer";
 
 
 export const orderItems = (itemsInBacket: ItemsType[], allItems: ItemsType[], dispatch: Function) => {
@@ -18,7 +18,7 @@ export const orderItems = (itemsInBacket: ItemsType[], allItems: ItemsType[], di
 }
 
 export const deleteItemsFromLCBacket = (_id: string, dispatch: Function, deletedPrice?: number) => {
-    dispatch(magActions.deleteByedItemFromBacketAC(_id, deletedPrice))
+    dispatch(deleteByedItemFromBacket({id:_id, deletedPrice:deletedPrice, amount: 0}))
 
     let res = localStorage.getItem('itemsInBacket')
     if (res !== null) {
@@ -30,7 +30,7 @@ export const deleteItemsFromLCBacket = (_id: string, dispatch: Function, deleted
 }
 
 export const addItemToLCBacket = (item: ItemsType, dispatch: Function) => {
-    dispatch(magActions.byeItemAC(item))
+    dispatch(byeItem({item}))
     let resLC = localStorage.getItem('itemsInBacket')
     if (resLC !== null) {
         const newPart = JSON.parse(resLC)
@@ -48,21 +48,21 @@ export type thunkAPIType = {
 export const handleError = (err: AxiosError, thunkAPI: thunkAPIType, showError = true) => {
     // dispatch(appActions.setError(err))
     if (showError) {
-        thunkAPI.dispatch(appActions.setError({error: err.message ? err.message[0] : 'Some troubles =( was happend!'}))
+        //@ts-ignore
+        thunkAPI.dispatch(setError({e: err.message ? err.message[0] : 'Some troubles =( was happend!'}))
     }
     return thunkAPI.rejectWithValue({errors: [err.message], fieldsErrors: undefined})
 }
 
 export const byedAmountFunc = (itemsNames:string[],state: reducerType) => {
-    const restCount =
-        state.items.byedItems.bItems.reduce((acc, el) => {
+    const restCount = state.items.byedItems.bItems.reduce((acc: number, el: ItemsType) => {
             acc += el.amount
             return acc
         }, 0)
 
     let allCount: ItemsType[] = []
     for (let i = 0; i < itemsNames.length; i++) {
-        let item = state.items.items.filter(f => f.title === itemsNames[i])[0]
+        let item = state.items.items.filter((f:ItemsType) => f.title === itemsNames[i])[0]
         allCount.push(item)
     }
 

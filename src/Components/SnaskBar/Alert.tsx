@@ -3,9 +3,9 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, {AlertProps} from '@mui/material/Alert';
 import {useDispatch} from "react-redux";
 import {useMagSelector} from "../../App/store";
-import {appActions} from "../../App/AppReducer";
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import {AxiosError} from "axios";
+import {sendedMessage, setError} from "../../App/AppReducer";
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -23,8 +23,8 @@ export default function AlertComponent() {
         if (reason === 'clickaway') {
             return;
         }
-        dispatch(appActions.setError(null))
-        dispatch(appActions.sendedMessage(false))
+        dispatch(setError({e: null}))
+        dispatch(sendedMessage({v:false}))
     };
 
     return (

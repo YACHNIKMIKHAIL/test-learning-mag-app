@@ -10,16 +10,17 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import {appActions, ModeType} from "../../App/AppReducer";
+import {changeMode, ModeType} from "../../App/AppReducer";
 import {useDispatch} from "react-redux";
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import {useMagSelector} from "../../App/store";
 import {ItemsType} from "../../Api/MagAPI";
 import {useDebounce} from "use-debounce";
-import {getItemsTC, magActions, searchItemsTC} from "../../Features/ItemsAction";
+import {getItemsTC} from "../../Features/ItemsAction";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import styledC from 'styled-components';
+import {byeItem, searchItems} from '../../Features/ItemsReducer';
 
 const headerStyle = {
     backgroundColor: 'rgba(0,217,255,0.58)',
@@ -77,26 +78,26 @@ export default function MuiHeader() {
 
     const goTo = () => {
         if (mode === 'bye') {
-            dispatch(appActions.changeMode('order'))
+            dispatch(changeMode({mode: 'order'}))
         } else if (mode === 'order') {
-            dispatch(appActions.changeMode('bye'))
+            dispatch(changeMode({mode: 'bye'}))
         } else if (mode === 'admin') {
-            dispatch(appActions.changeMode('bye'))
+            dispatch(changeMode({mode: 'bye'}))
         }
     }
 
     const goToAdm = () => {
-        dispatch(appActions.changeMode('admin'))
+        dispatch(changeMode({mode: 'admin'}))
     }
     const goToBack = () => {
-        dispatch(appActions.changeMode('bye'))
+        dispatch(changeMode({mode: 'bye'}))
     }
 
     useEffect(() => {
         if (search === '') {
             dispatch(getItemsTC())
         } else {
-            dispatch(searchItemsTC(search))
+            dispatch(searchItems({v:search}))
         }
     }, [ds])
 
@@ -107,7 +108,7 @@ export default function MuiHeader() {
             let resultItems = JSON.parse(res)
 
             resultItems.forEach((i: ItemsType) => {
-                dispatch(magActions.byeItemAC(i))
+                dispatch(byeItem({item: i}))
             })
         }
     }, [dispatch])
@@ -141,7 +142,7 @@ export default function MuiHeader() {
                             inputProps={{'aria-label': 'search'}}
                             value={search}
                             disabled={isLoad}
-                            onChange={(e) => dispatch(magActions.searchItemsAC(e.currentTarget.value))}
+                            onChange={(e) => dispatch(searchItems({v: e.currentTarget.value}))}
                         />
                     </Search>}
                     {/*<CCase>{totalCost === 0 ? null : `${totalCost} $`}</CCase>*/}

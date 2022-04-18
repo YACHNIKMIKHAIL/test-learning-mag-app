@@ -9,6 +9,7 @@ import {IconButton} from "@mui/material";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import {changeAmountByedItem} from "../../../../Features/ItemsReducer";
 
 type ByedItemPropsType = {
     item: ItemsType
@@ -26,7 +27,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             return
         } else {
             setAmountX(amountX - 1)
-            dispatch(magActions.changeAmountByedItemAC(_id, amount + 1, totalCost - item.cost))
+            dispatch(changeAmountByedItem({id:_id, amount:amount +1, totalPrice:totalCost -item.cost}))
         }
     }
     const plusAmount = () => {
@@ -34,7 +35,7 @@ const ByedItem = ({item}: ByedItemPropsType) => {
             return
         } else {
             setAmountX(amountX + 1)
-            dispatch(magActions.changeAmountByedItemAC(_id, amount - 1, totalCost + item.cost))
+            dispatch(changeAmountByedItem({id:_id, amount:amount -1,totalPrice :totalCost +item.cost}))
         }
     }
     const deleteItenFromBacket = () => {
