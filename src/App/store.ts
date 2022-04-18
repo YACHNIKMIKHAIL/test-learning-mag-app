@@ -1,9 +1,8 @@
 import {combineReducers} from "redux";
-import magThunk, {ThunkAction} from "redux-thunk";
+import magThunk from "redux-thunk";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {itemsReducer} from "../Features/ItemsReducer";
-import {magActions} from "../Features/ItemsAction";
-import { appReducer} from "./AppReducer";
+import {appReducer} from "./AppReducer";
 import {configureStore} from "@reduxjs/toolkit";
 
 const reducer = combineReducers({
@@ -36,5 +35,5 @@ export const useMagSelector: TypedUseSelectorHook<reducerType> = useSelector
 //     reducerType,
 //     unknown,
 //     ActionsType>
-// // @ts-ignore
-// window.store = store
+// @ts-ignore
+window.store = store

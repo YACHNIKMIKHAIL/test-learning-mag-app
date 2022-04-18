@@ -80,7 +80,6 @@ export const getItemsTC = createAsyncThunk<undefined, undefined, ThunkErrorAPICo
 //     dispatch(appActions.setLoad(true))
 //     try {
 //         let res = await magAPI.searchItems(s)
-//         debugger
 //         if (res) {
 //             if (res === 'No items') {
 //                 dispatch(magActions.getItemsAC([]))
@@ -99,16 +98,16 @@ export const getItemsTC = createAsyncThunk<undefined, undefined, ThunkErrorAPICo
 // }
 
 export const searchItemsTC = createAsyncThunk<{ s: string }, string, ThunkErrorAPIConfigType>('d', async (s, thunkAPI) => {
-    thunkAPI.dispatch(setLoad({v:true}))
+    thunkAPI.dispatch(setLoad({v: true}))
     try {
         let res = await magAPI.searchItems(s)
-        thunkAPI.dispatch(magActions.getItems(res))
+        thunkAPI.dispatch(getItems({items: res}))
         return {res}
     } catch (e: any) {
         const err: AxiosError = e
         return handleError(err, thunkAPI)
     } finally {
-        thunkAPI.dispatch(setLoad({v:false}))
+        thunkAPI.dispatch(setLoad({v: false}))
     }
 })
 // export const postItemTC_ = (item: PostItemType): magThunkType => async (dispatch) => {
@@ -125,7 +124,7 @@ export const searchItemsTC = createAsyncThunk<{ s: string }, string, ThunkErrorA
 //     }
 // }
 export const postItemTC = createAsyncThunk<{ item: PostItemType }, PostItemType, ThunkErrorAPIConfigType>('a', async (item, thunkAPI) => {
-    thunkAPI.dispatch(setLoad({v:true}))
+    thunkAPI.dispatch(setLoad({v: true}))
     try {
         let res = await magAPI.postItem(item)
         if (res) {
@@ -135,7 +134,7 @@ export const postItemTC = createAsyncThunk<{ item: PostItemType }, PostItemType,
         const err: AxiosError = e
         return handleError(err, thunkAPI)
     } finally {
-        thunkAPI.dispatch(setLoad({v:false}))
+        thunkAPI.dispatch(setLoad({v: false}))
     }
 })
 
@@ -156,7 +155,7 @@ export const postItemTC = createAsyncThunk<{ item: PostItemType }, PostItemType,
 // }
 
 export const deleteItemTC = createAsyncThunk<{ id: string }, string, ThunkErrorAPIConfigType>('b', async (id, thunkAPI) => {
-    thunkAPI.dispatch(setLoad({v:true}))
+    thunkAPI.dispatch(setLoad({v: true}))
     try {
         let res = await magAPI.deleteItem(id)
         if (res) {
@@ -166,7 +165,7 @@ export const deleteItemTC = createAsyncThunk<{ id: string }, string, ThunkErrorA
         const err: AxiosError = e
         return handleError(err, thunkAPI)
     } finally {
-        thunkAPI.dispatch(setLoad({v:false}))
+        thunkAPI.dispatch(setLoad({v: false}))
     }
 })
 
@@ -186,7 +185,7 @@ export const deleteItemTC = createAsyncThunk<{ id: string }, string, ThunkErrorA
 //     }
 // }
 export const updateItemTC = createAsyncThunk<{ item: ItemsType }, ItemsType, ThunkErrorAPIConfigType>('c', async (item, thunkAPI) => {
-    thunkAPI.dispatch(setLoad({v:true}))
+    thunkAPI.dispatch(setLoad({v: true}))
     try {
         let res = await magAPI.updateItem(item)
         if (res) {
@@ -196,7 +195,7 @@ export const updateItemTC = createAsyncThunk<{ item: ItemsType }, ItemsType, Thu
         const err: AxiosError = e
         return handleError(err, thunkAPI)
     } finally {
-        thunkAPI.dispatch(setLoad({v:false}))
+        thunkAPI.dispatch(setLoad({v: false}))
     }
 })
 
@@ -217,11 +216,13 @@ export const updateItemTC = createAsyncThunk<{ item: ItemsType }, ItemsType, Thu
 //         dispatch(appActions.setLoad(false))
 //     }
 // }
-export const orderItemsTC = createAsyncThunk<{ name: string, email: string, city: string, street: string }, { name: string, email: string, city: string, street: string }, ThunkErrorAPIConfigType>('f', async (params, thunkAPI) => {
+export const orderItemsTC = createAsyncThunk<{ name: string, email: string, city: string, street: string },
+    { name: string, email: string, city: string, street: string }, ThunkErrorAPIConfigType>
+('f', async (params, thunkAPI) => {
     const {dispatch, getState} = thunkAPI
     const state = getState() as reducerType
 
-    dispatch(setLoad({v:true}))
+    dispatch(setLoad({v: true}))
     const price = state.items.byedItems.totalCoast
     const itemsNames = state.items.byedItems.bItems.map((m: ItemsType) => {
         return m.title
@@ -229,11 +230,11 @@ export const orderItemsTC = createAsyncThunk<{ name: string, email: string, city
     try {
         await magAPI.sendMessage(params.name, params.email, params.city, params.street, byedAmountFunc(itemsNames, state), price, itemsNames)
         dispatch(resetTotalPrice({}))
-        dispatch(sendedMessage({v:true}))
+        dispatch(sendedMessage({v: true}))
     } catch (e: any) {
         const err: AxiosError = e
         return handleError(err, thunkAPI)
     } finally {
-        thunkAPI.dispatch(setLoad({v:false}))
+        thunkAPI.dispatch(setLoad({v: false}))
     }
 })

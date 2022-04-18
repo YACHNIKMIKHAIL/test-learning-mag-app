@@ -102,6 +102,7 @@ const slice = createSlice({
                 })
                 .addCase(searchItemsTC.fulfilled, (state, action) => {
                     // return {...state, items: action.payload.items}
+                    // state.items= action.payload.items
                 })
                 .addCase(postItemTC.fulfilled, (state, action) => {
                     // return {...state, items: action.payload.items}
@@ -113,6 +114,7 @@ const slice = createSlice({
                     // return {...state, items: action.payload.items}
                 })
                 .addCase(orderItemsTC.fulfilled, (state, action) => {
+
                 })
 
         }
