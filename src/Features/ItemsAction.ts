@@ -70,7 +70,7 @@ export const searchItemsTC = createAsyncThunk<{ s: string }, string, ThunkErrorA
         thunkAPI.dispatch(setLoad({v: false}))
     }
 })
-export const postItemTC = createAsyncThunk<{ item: PostItemType }, PostItemType, ThunkErrorAPIConfigType>('a', async (item, thunkAPI) => {
+export const postItemTC = createAsyncThunk<{ item: PostItemType }, PostItemType, ThunkErrorAPIConfigType>('items/post', async (item, thunkAPI) => {
     thunkAPI.dispatch(setLoad({v: true}))
     try {
         let res = await magAPI.postItem(item)
@@ -84,7 +84,7 @@ export const postItemTC = createAsyncThunk<{ item: PostItemType }, PostItemType,
         thunkAPI.dispatch(setLoad({v: false}))
     }
 })
-export const deleteItemTC = createAsyncThunk<{ id: string }, string, ThunkErrorAPIConfigType>('b', async (id, thunkAPI) => {
+export const deleteItemTC = createAsyncThunk<{ id: string }, string, ThunkErrorAPIConfigType>('items/delete', async (id, thunkAPI) => {
     thunkAPI.dispatch(setLoad({v: true}))
     try {
         let res = await magAPI.deleteItem(id)
@@ -98,7 +98,7 @@ export const deleteItemTC = createAsyncThunk<{ id: string }, string, ThunkErrorA
         thunkAPI.dispatch(setLoad({v: false}))
     }
 })
-export const updateItemTC = createAsyncThunk<{ item: ItemsType }, ItemsType, ThunkErrorAPIConfigType>('c', async (item, thunkAPI) => {
+export const updateItemTC = createAsyncThunk<{ item: ItemsType }, ItemsType, ThunkErrorAPIConfigType>('items/update', async (item, thunkAPI) => {
     thunkAPI.dispatch(setLoad({v: true}))
     try {
         let res = await magAPI.updateItem(item)
