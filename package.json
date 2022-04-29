@@ -40,8 +40,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start:prod": "node ./index.tsx"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
