@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Loader = () => {
     return <LoaderCase>
-        <CircularProgress color="inherit" size={250} thickness={5} style={{color:'aqua'}}/>
+        <CircularProgress color="inherit" size={240} thickness={5} style={{color:'aqua'}}/>
     </LoaderCase>
 };
 
